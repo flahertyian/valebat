@@ -1,4 +1,3 @@
-package maze;
 //the player who navigates the maze
 public class Player {
 	int health;

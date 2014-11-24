@@ -1,5 +1,3 @@
-package maze;
-
 public class Creature {
 	int health;
 	int attack;

@@ -1,5 +1,3 @@
-package maze;
-
 import java.awt.event.KeyEvent;
 
 
