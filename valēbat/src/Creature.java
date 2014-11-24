@@ -1,25 +1,27 @@
+package maze;
 
 public class Creature {
 	int health;
 	int attack;
-	public  Creature (int health, int attack) {
+	public Creature(int health, int attack){
 		this.health = health;
-		this.attack = attack;
+		this.attack = attack; 
 	}
 	
-	public int getHealth() {
-		return health;
+	
+	public void attack(Player p){
+		p.damage(attack);
+	}
+	public int getAttack(){
+		return this.attack;
+	}
+	public void damage(int damage){
+		this.health -= damage;
+	}
+	public int getHealth(){
+		return this.health;
 	}
 	
-	public int getAttack() {
-		return attack;
-	}
-	
-	public void isHit(int dmg) {
-		health -= dmg;
-	}
-	
-	public void fight(Creature target) {
-		target.isHit(attack);
-	}
 }
+
+	
