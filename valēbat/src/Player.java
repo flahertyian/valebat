@@ -42,72 +42,104 @@ public class Player {
 			if(choice == "right"){
 				if(b[x+c][y].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "left"){
 				if(b[x-c][y].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "forward"){
 				if(b[x][y-c].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "back"){
 				if(b[x][y+c].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}
 		}else if(direction == "south"){
 			if(choice == "right"){
 				if(b[x-c][y].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "left"){
 				if(b[x+c][y].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "forward"){
 				if(b[x][y+c].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "back"){
 				if(b[x][y-c].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}
 		}else if(direction == "west"){
 			if(choice == "right"){
 				if(b[x][y-c].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "left"){
 				if(b[x][y+c].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "forward"){
 				if(b[x-c][y].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "back"){
 				if(b[x+c][y].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}
 		}else if(direction == "east"){
 			if(choice == "right"){
 				if(b[x][y+c].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "left"){
 				if(b[x][y-c].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "forward"){
 				if(b[x+c][y].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}else if(choice == "back"){
 				if(b[x-c][y].getIsWall()){
 					return false;
+				}else{
+					return true;
 				}
 			}
 		}
