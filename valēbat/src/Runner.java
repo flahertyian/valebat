@@ -1,5 +1,3 @@
-package maze;
-
 import javax.swing.JFrame;
 
 public class Runner extends JFrame {
