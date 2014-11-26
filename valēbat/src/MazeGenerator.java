@@ -262,24 +262,24 @@ public class MazeGenerator {
 		for (int c = 0; c < width; c++) {
 			for (int u = 0; u < height; u++) {
 				if (board[c][u].getThere()) {
-					System.out.print("  ");
+//					System.out.print("  ");
 					space++;
 				} else if (board[c][u].getIsAdjacent()){
-					System.out.print("W ");
+//					System.out.print("W ");
 					//--------------------------NECESSARY-------------------------------------
 					board[c][u].setWall();					
 					//------------------------------------------------------------------------
 				} else {
-					System.out.print("X ");
+//					System.out.print("X ");
 					//---------------------------NECESSARY-------------------------------------
 					board[c][u].setWall();
 					//------------------------------------------------------------------------
 				}
 			}
-			System.out.println();
+//			System.out.println();
 		}
-		System.out.println();
-		System.out.println(space);
+//		System.out.println();
+//		System.out.println(space);
 //------------------------------------------------------------------------
 	}
 	
