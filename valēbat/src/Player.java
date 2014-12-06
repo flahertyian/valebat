@@ -1,18 +1,20 @@
 //the player who navigates the maze
 public class Player {
-	int health;
-	int attack;
-	String direction; 
-	int locX;
-	static int locY;
-	Board b;
-	
+	private int HEALTH;
+	private int ATTACK;
+	private String DIRECTION; 
+	private int locX;
+	private int locY;
+	private MazeTile[][] b;
 	//constructer for the player class: attack, direction and the board;
-	public Player(int health,int attack,String direction,Board b){
+	public Player(int health,int attack,String direction,MazeTile[][] b){
+		this.b=b;
 		this.attack = attack;
 		this.health = health;
 		this.direction = direction;
-		this.Board b;
+	}
+	public void action(){
+		testOption("forward");
 	}
 	//tests and executes a move right
 	public void moveRight(){
@@ -39,25 +41,25 @@ public class Player {
 		int c = 1;
 		if(direction == "north"){
 			if(choice == "right"){
-				if(b[x+c][y].getIsWall()){
+				if(b[x+c][y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "left"){
-				if(b[x-c][y].getIsWall()){
+				if(b[x-c][y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "forward"){
-				if(b[x][y-c].getIsWall()){
+				if(b[x][y-c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "back"){
-				if(b[x][y+c].getIsWall()){
+				if(b[x][y+c].getWall()){
 					return false;
 				}else{
 					return true;
@@ -65,25 +67,25 @@ public class Player {
 			}
 		}else if(direction == "south"){
 			if(choice == "right"){
-				if(b[x-c][y].getIsWall()){
+				if(b[x-c][y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "left"){
-				if(b[x+c][y].getIsWall()){
+				if(b[x+c][y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "forward"){
-				if(b[x][y+c].getIsWall()){
+				if(b[x][y+c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "back"){
-				if(b[x][y-c].getIsWall()){
+				if(b[x][y-c].getWall()){
 					return false;
 				}else{
 					return true;
@@ -91,25 +93,25 @@ public class Player {
 			}
 		}else if(direction == "west"){
 			if(choice == "right"){
-				if(b[x][y-c].getIsWall()){
+				if(b[x][y-c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "left"){
-				if(b[x][y+c].getIsWall()){
+				if(b[x][y+c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "forward"){
-				if(b[x-c][y].getIsWall()){
+				if(b[x-c][y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "back"){
-				if(b[x+c][y].getIsWall()){
+				if(b[x+c][y].getWall()){
 					return false;
 				}else{
 					return true;
@@ -117,25 +119,25 @@ public class Player {
 			}
 		}else if(direction == "east"){
 			if(choice == "right"){
-				if(b[x][y+c].getIsWall()){
+				if(b[x][y+c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "left"){
-				if(b[x][y-c].getIsWall()){
+				if(b[x][y-c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "forward"){
-				if(b[x+c][y].getIsWall()){
+				if(b[x+c][y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "back"){
-				if(b[x-c][y].getIsWall()){
+				if(b[x-c][y].getWall()){
 					return false;
 				}else{
 					return true;
