@@ -26,6 +26,8 @@ public class MazeGenerator {
 				board[i][x] = new MazeTile();
 			}
 		}
+		int backs = 0;
+		int track = 0;
 		int x = start_X;
 		int y = start_Y;
 		int spaces = 0;
@@ -39,6 +41,26 @@ public class MazeGenerator {
 			boolean two = false;
 			boolean three = false;
 			boolean four = false;
+			//If it reaches the end of the maze, go back to the start
+			if (board[x][y].getExit()) {
+				board[x][y].setThere();
+				x = start_X;
+				y = start_Y;	
+			}
+			//if the maze can't be finished (determined by having had to backtrack 10 * the area of the map)...
+			//...it resets the maze so that it can try again
+			if (backs >= height * width * 100) {
+				//changes backs and spaces back to 0
+				backs = 0;
+				spaces = 0;
+				//puts the generator back at the start
+				x = start_X;
+				y = start_Y;	
+		        //lets us know it happened
+				track++;
+				System.out.println(track);
+				
+			}
 			//they check if there are unvisited adjacent spaces
 			if (x != 0) {
 				one = (!board[x-1][y].getIsAdjacent() && !board[x-1][y].getThere());
@@ -122,7 +144,7 @@ public class MazeGenerator {
 				}
 				//spaces is there to make sure the maze is long enough
 				spaces++;
-				//guarentees a workable maze
+				//guarantees a workable maze
 				x += maybeX;
 				y += maybeY;
 				//once the new point is selected...
@@ -158,7 +180,7 @@ public class MazeGenerator {
 				//marks all spots as not adjacent
 				for (int i = 0; i < width; i++) {
 					for (int o = 0; o < height; o++) {
-						board[i][o].resetThere();
+						board[i][o].resetAdjacent();
 					}
 				}
 				//re-marks all the adjacent spots as adjacent except the ones only adjacent to the current space.
@@ -182,6 +204,8 @@ public class MazeGenerator {
 				}
 				alternate = true;
 			} else {
+				//backs is used to determine how many times it has backtracked
+				backs++;
 				//boolean hasMoved tells if they have backtracked
 				boolean hasMoved = false;
 				while (!hasMoved) {
@@ -259,27 +283,42 @@ public class MazeGenerator {
 		}
 //-------------------PRINTS OUT BOARD--------------------------------------
 		int space = 0;
+		for (int u = 0; u <= height; u++) {
+			System.out.print("##");
+		}
+		System.out.println("#");
 		for (int c = 0; c < width; c++) {
+			System.out.print("# ");
 			for (int u = 0; u < height; u++) {
 				if (board[c][u].getThere()) {
-//					System.out.print("  ");
+					if (board[c][u].getStart()) {
+						System.out.print("S ");
+					} else if (board[c][u].getExit()) {
+						System.out.print("E ");
+					} else {
+						System.out.print("  ");
+					}
 					space++;
 				} else if (board[c][u].getIsAdjacent()){
-//					System.out.print("W ");
+					System.out.print("# ");
 					//--------------------------NECESSARY-------------------------------------
 					board[c][u].setWall();					
 					//------------------------------------------------------------------------
 				} else {
-//					System.out.print("X ");
+					System.out.print("# ");
 					//---------------------------NECESSARY-------------------------------------
 					board[c][u].setWall();
 					//------------------------------------------------------------------------
 				}
 			}
-//			System.out.println();
+			System.out.println("#");
 		}
-//		System.out.println();
-//		System.out.println(space);
+		for (int u = 0; u <= height; u++) {
+			System.out.print("##");
+		}
+		System.out.println("#");
+		System.out.println();
+		System.out.println(space);
 //------------------------------------------------------------------------
 	}
 	

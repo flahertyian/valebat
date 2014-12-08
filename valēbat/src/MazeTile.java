@@ -31,6 +31,10 @@ public class MazeTile {
 	}
 	
 	public void resetThere() {
+		alreadyThere = false;
+	}
+	
+	public void resetAdjacent() {
 		isAdjacent = false;
 	}
 
