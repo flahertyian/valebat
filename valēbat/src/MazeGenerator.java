@@ -8,8 +8,7 @@ public class MazeGenerator {
 	MazeTile[][] board;
 
 	public MazeGenerator(int width, int height, int start_X, int start_Y, int end_X, int end_Y) {
-		//initializes the board
-		//hi ian
+		//initializes the board.
 		this.width = width;
 		this.height = height;
 		this.start_X = start_X;

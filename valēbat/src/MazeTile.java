@@ -22,7 +22,7 @@ public class MazeTile {
 		hasSouth = false;
 	}
 
-	//all are self-explanitory
+	//all are self-explanitory.
 	public void setAdjacent() {
 		isAdjacent = true;
 	}
