@@ -14,11 +14,13 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	private Thread game;
 
 	public Game(boolean gameOverTest, Board b){
-		Player player = new Player(10, 5, "north",b );
 		this.gameOverTest = gameOverTest;
 		setFocusable(true);
 		setPreferredSize(new Dimension(boardSizeX,boardSizeY));//1200,800
 		addKeyListener(this);
+		MazeGenerator abyss = new MazeGenerator(10,10,5,0,10,7);
+		MazeTile[][] b = abyss.getBoard();
+		Player player = new Player(10, 5, "north",b,5,0);
 	}
 
 	private void update(){
