@@ -3,15 +3,17 @@ public class Player {
 	private int HEALTH;
 	private int ATTACK;
 	private String DIRECTION; 
-	private int locX;
-	private int locY;
+	private int LOC_X;
+	private int LOC_Y;
 	private MazeTile[][] b;
 	//constructer for the player class: attack, direction and the board;
-	public Player(int health,int attack,String direction,MazeTile[][] b){
-		this.b=b;
-		this.attack = attack;
-		this.health = health;
-		this.direction = direction;
+	public Player(int health,int attack,String direction,MazeTile[][] b,int locX,int locY){
+		this.b = b;
+		this.ATTACK = attack;
+		this.HEALTH = health;
+		this.DIRECTION = direction;
+		this.LOC_Y=locY;
+		this.LOC_X=locX;
 	}
 	public void action(){
 		testOption("forward");
@@ -36,142 +38,141 @@ public class Player {
 	
 	//called to test if the next move is occupied with a tile
 	private boolean testOption(String choice){
-		int x;
-		int y;
 		int c = 1;
-		if(direction == "north"){
+		if(DIRECTION == "north"){
 			if(choice == "right"){
-				if(b[x+c][y].getWall()){
+				if(b[LOC_X+c][LOC_Y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "left"){
-				if(b[x-c][y].getWall()){
+				if(b[LOC_X-c][LOC_Y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "forward"){
-				if(b[x][y-c].getWall()){
+				if(b[LOC_X][LOC_Y-c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "back"){
-				if(b[x][y+c].getWall()){
+				if(b[LOC_X][LOC_Y+c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}
-		}else if(direction == "south"){
+		}else if(DIRECTION == "south"){
 			if(choice == "right"){
-				if(b[x-c][y].getWall()){
+				if(b[LOC_X-c][LOC_Y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "left"){
-				if(b[x+c][y].getWall()){
+				if(b[LOC_X+c][LOC_Y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "forward"){
-				if(b[x][y+c].getWall()){
+				if(b[LOC_X][LOC_Y+c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "back"){
-				if(b[x][y-c].getWall()){
+				if(b[LOC_X][LOC_Y-c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}
-		}else if(direction == "west"){
+		}else if(DIRECTION == "west"){
 			if(choice == "right"){
-				if(b[x][y-c].getWall()){
+				if(b[LOC_X][LOC_Y-c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "left"){
-				if(b[x][y+c].getWall()){
+				if(b[LOC_X][LOC_Y+c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "forward"){
-				if(b[x-c][y].getWall()){
+				if(b[LOC_X-c][LOC_Y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "back"){
-				if(b[x+c][y].getWall()){
+				if(b[LOC_X+c][LOC_Y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}
-		}else if(direction == "east"){
+		}else if(DIRECTION == "east"){
 			if(choice == "right"){
-				if(b[x][y+c].getWall()){
+				if(b[LOC_X][LOC_Y+c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "left"){
-				if(b[x][y-c].getWall()){
+				if(b[LOC_X][LOC_Y-c].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "forward"){
-				if(b[x+c][y].getWall()){
+				if(b[LOC_X+c][LOC_Y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}else if(choice == "back"){
-				if(b[x-c][y].getWall()){
+				if(b[LOC_X-c][LOC_Y].getWall()){
 					return false;
 				}else{
 					return true;
 				}
 			}
 		}
-
+		return true;
 	}
 
 	//gives the attacked unit damage
 	public void attack(Creature c){
-		c.damage(attack);
+		c.damage(ATTACK);
 	}
 	//returns the value of attack
 	public int getAttack(){
-		return this.attack;
+		return this.ATTACK;
 	}
 	//called with the player takes damage 
 	public void damage(int damage){
-		this.health -= damage;
+		this.HEALTH -= damage;
 	}
 	//returns the health of the player
 	public int getHealth(){
-		return this.health;
+		return this.HEALTH;
 	}
 	//returns the direction the player is facing
 	public String getDirection(){
-		return direction;
+		return DIRECTION;
 	}
 	public boolean gameOverTest(){
-		if(this.health <= 0){
+		if(this.HEALTH <= 0){
 			return true;
 		}else {
 			return false;
 		}
+
 	}
 }
