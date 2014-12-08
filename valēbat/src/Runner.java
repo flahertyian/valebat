@@ -3,8 +3,7 @@ import javax.swing.JFrame;
 public class Runner extends JFrame {
 
 	public static void main(String[]args){
-		Board b = new Board();
-		Game game = new Game(gameOverTest(),b);
+		Game game = new Game(gameOverTest());
 		JFrame jf = new JFrame();
 		jf.setResizable(false);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

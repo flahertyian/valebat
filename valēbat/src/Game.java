@@ -13,7 +13,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	public static final int boardSizeY = 800;
 	private Thread game;
 
-	public Game(boolean gameOverTest, Board b){
+	public Game(boolean gameOverTest){
 		this.gameOverTest = gameOverTest;
 		setFocusable(true);
 		setPreferredSize(new Dimension(boardSizeX,boardSizeY));//1200,800
