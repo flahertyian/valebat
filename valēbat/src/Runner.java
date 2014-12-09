@@ -3,7 +3,8 @@ import javax.swing.JFrame;
 public class Runner extends JFrame {
 
 	public static void main(String[]args){
-		Game game = new Game(gameOverTest());
+		System.out.println("Start");
+		Game game = new Game();
 		JFrame jf = new JFrame();
 		jf.setResizable(false);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -16,7 +17,7 @@ public class Runner extends JFrame {
 		game.start();
 	}
 	
-	public static boolean gameOverTest(){
-		return false;
-	}
+	// public static boolean gameOverTest(){
+	// 	return false;
+	// }
 }

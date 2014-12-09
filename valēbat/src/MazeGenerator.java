@@ -1,6 +1,7 @@
 public class MazeGenerator {
-	int width;
-	int height;
+	//thomas can you go through and make thse variables fit codeing conventions pls :)
+	private int width;
+	private int height;
 	int start_X;
 	int start_Y;
 	int end_X;
@@ -22,6 +23,7 @@ public class MazeGenerator {
 	public void initialize() {
 		for (int i = 0; i < width; i++) {
 			for (int x = 0; x < height; x++) {
+				System.out.println(i +  "|" + x);
 				board[i][x] = new MazeTile();
 			}
 		}
@@ -30,8 +32,9 @@ public class MazeGenerator {
 		int x = start_X;
 		int y = start_Y;
 		int spaces = 0;
-		board[start_X][start_Y].setStart();
-		board[end_X][end_Y].setExit();
+		//System.out.println(board.size());
+		board[0][0].setStart();
+		board[5][5].setExit();
 		boolean works = false;
 		boolean alternate = false;
 		//Creates the board

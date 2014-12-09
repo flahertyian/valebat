@@ -15,6 +15,7 @@ public class Player {
 		this.LOC_Y=locY;
 		this.LOC_X=locX;
 	}
+	//tests forward for a wall then preformes action
 	public void action(){
 		testOption("forward");
 	}

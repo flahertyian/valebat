@@ -8,19 +8,38 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel implements Runnable,KeyListener{
 	private boolean running;
-	private boolean gameOverTest;
+	//private boolean gameOverTest;
 	public static final int boardSizeX = 1200;
 	public static final int boardSizeY = 800;
 	private Thread game;
 
-	public Game(boolean gameOverTest){
-		this.gameOverTest = gameOverTest;
+	public Game(){
+		int startX=0;
+		int startY=0;
+		String direction = null;
 		setFocusable(true);
 		setPreferredSize(new Dimension(boardSizeX,boardSizeY));//1200,800
 		addKeyListener(this);
-		MazeGenerator abyss = new MazeGenerator(10,10,5,0,10,7);
+		MazeGenerator abyss = new MazeGenerator(10,10,startX,startY,5,5);
 		MazeTile[][] b = abyss.getBoard();
-		Player player = new Player(10, 5, "north",b,5,0);
+		Player player = new Player(10, 5, direction,b,startX,startY);
+		b[startX][startY].addPlayer();
+		direction = direction(b,startX,startY);
+
+	}
+	private String direction(MazeTile[][] b,int x,int y){
+		if(!b[x][y-1].getWall()){
+			return "north";
+		}else if(!b[x-1][y].getWall()){
+			return "west";
+		}else if(!b[x+1][y].getWall()){
+			return "east";
+		}else if(!b[x+1][y+1].getWall()){
+			return "south";
+		}else{
+			return "uFuckedUp";
+		}
+
 	}
 
 	private void update(){
@@ -57,9 +76,6 @@ public class Game extends JPanel implements Runnable,KeyListener{
 			double now = System.nanoTime();
 			notprocessed += (now - then) / nsPerUpdate;
 			then = now;
-			if(gameOverTest){
-				running = false;
-			}
 
 
 			while(notprocessed >=1 ){

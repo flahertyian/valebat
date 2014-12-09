@@ -1,23 +1,23 @@
 public class Creature {
-	int health;
-	int attack;
+	private int HEALTH;
+	private int ATTACK;
 	public Creature(int health, int attack){
-		this.health = health;
-		this.attack = attack; 
+	this.HEALTH = health;
+	this.ATTACK = attack; 
 	}
 	
 	
 	public void attack(Player p){
-		p.damage(attack);
+		p.damage(ATTACK);
 	}
 	public int getAttack(){
-		return this.attack;
+		return this.ATTACK;
 	}
 	public void damage(int damage){
-		this.health -= damage;
+		this.HEALTH -= damage;
 	}
 	public int getHealth(){
-		return this.health;
+		return this.HEALTH;
 	}
 	
 }
