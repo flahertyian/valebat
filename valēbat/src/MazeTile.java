@@ -9,6 +9,7 @@ public class MazeTile {
 	boolean hasEast; 
 	boolean hasNorth; 
 	boolean hasSouth; 
+	boolean containsPlayer;
 	public MazeTile() {
 		isAdjacent = false;
 		alreadyThere = false;
@@ -20,8 +21,12 @@ public class MazeTile {
 		hasEast = false;
 		hasNorth = false;
 		hasSouth = false;
+		containsPlayer = false;
 	}
-
+	//adds the player to the board(ARRAY)
+	public void addPlayer(){
+		containsPlayer = true;
+	}
 	//all are self-explanitory.
 	public void setAdjacent() {
 		isAdjacent = true;

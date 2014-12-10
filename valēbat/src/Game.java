@@ -16,28 +16,35 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	public Game(){
 		int startX=0;
 		int startY=0;
-		String direction = null;
 		setFocusable(true);
 		setPreferredSize(new Dimension(boardSizeX,boardSizeY));//1200,800
 		addKeyListener(this);
 		MazeGenerator abyss = new MazeGenerator(10,10,startX,startY,5,5);
 		MazeTile[][] b = abyss.getBoard();
-		Player player = new Player(10, 5, direction,b,startX,startY);
+		Player player = new Player(10, 5, direction(b,startX,startY),b,startX,startY);
 		b[startX][startY].addPlayer();
-		direction = direction(b,startX,startY);
-
 	}
 	private String direction(MazeTile[][] b,int x,int y){
-		if(!b[x][y-1].getWall()){
-			return "north";
-		}else if(!b[x-1][y].getWall()){
-			return "west";
-		}else if(!b[x+1][y].getWall()){
-			return "east";
-		}else if(!b[x+1][y+1].getWall()){
-			return "south";
+		if(x > 0 && y > 0){
+			if(!b[x][y-1].getWall()){
+				return "north";
+			}else if(!b[x-1][y].getWall()){
+				return "west";
+			}else if(!b[x+1][y].getWall()){
+				return "east";
+			}else if(!b[x+1][y+1].getWall()){
+				return "south";
+			}else{
+				return "oops1";
+			}
 		}else{
-			return "uFuckedUp";
+			if(!b[x][y+1].getWall()){
+				return "south";
+			}else if(!b[x+1][y].getWall()){
+				return "east";
+			}else{
+				return "oops2";
+			}
 		}
 
 	}

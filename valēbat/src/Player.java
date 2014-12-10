@@ -14,6 +14,7 @@ public class Player {
 		this.DIRECTION = direction;
 		this.LOC_Y=locY;
 		this.LOC_X=locX;
+		System.out.println(DIRECTION);
 	}
 	//tests forward for a wall then preformes action
 	public void action(){
