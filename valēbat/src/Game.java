@@ -14,38 +14,73 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	private Thread game;
 
 	public Game(){
-		int startX=0;
-		int startY=0;
+		int startX=1;
+		int startY=1;
 		setFocusable(true);
 		setPreferredSize(new Dimension(boardSizeX,boardSizeY));//1200,800
 		addKeyListener(this);
 		MazeGenerator abyss = new MazeGenerator(10,10,startX,startY,5,5);
+		int height = abyss.height;
+		int width =	abyss.width;
 		MazeTile[][] b = abyss.getBoard();
 		Player player = new Player(10, 5, direction(b,startX,startY),b,startX,startY);
 		b[startX][startY].addPlayer();
+		printBoard(b,height,width);
 	}
-	private String direction(MazeTile[][] b,int x,int y){
-		if(x > 0 && y > 0){
-			if(!b[x][y-1].getWall()){
-				return "north";
-			}else if(!b[x-1][y].getWall()){
-				return "west";
-			}else if(!b[x+1][y].getWall()){
-				return "east";
-			}else if(!b[x+1][y+1].getWall()){
-				return "south";
-			}else{
-				return "oops1";
-			}
-		}else{
-			if(!b[x][y+1].getWall()){
-				return "south";
-			}else if(!b[x+1][y].getWall()){
-				return "east";
-			}else{
-				return "oops2";
-			}
+	public void printBoard(MazeTile[][] b,int height,int width){
+	int space = 0;
+		for (int u = 0; u <= height; u++) {
+				System.out.print("##");
 		}
+		System.out.println("#");
+		for (int c = 0; c < width; c++) {
+			System.out.print("# ");
+			for (int u = 0; u < height; u++) {
+				if (b[c][u].getThere()) {
+					if (b[c][u].getStart()) {
+						System.out.print("S ");
+					} else if (b[c][u].getExit()) {
+							System.out.print("E ");
+					} else {
+						System.out.print("  ");
+					}
+					space++;
+				} else if (b[c][u].getIsAdjacent()){
+					System.out.print("# ");
+						//--------------------------NECESSARY-------------------------------------
+						//board[c][u].setWall();					
+						//------------------------------------------------------------------------
+				} else {
+					System.out.print("# ");
+						//---------------------------NECESSARY-------------------------------------
+						//board[c][u].setWall();
+						//------------------------------------------------------------------------
+				}
+			}
+			System.out.println("#");
+		}
+		for (int u = 0; u <= height; u++) {
+			System.out.print("##");
+		}
+	System.out.println("#");
+	System.out.println();
+	System.out.println(space);
+//------------------------------------------------------------------------
+	}
+
+	private String direction(MazeTile[][] b,int x,int y){
+		if(!b[x][y-1].getWall()){
+			return "north";
+		}else if(!b[x-1][y].getWall()){
+			return "west";
+		}else if(!b[x+1][y].getWall()){
+			return "east";
+		}else if(!b[x][y+1].getWall()){
+			return "south";
+		}else{
+			return "oops1";
+		}
+
 
 	}
 

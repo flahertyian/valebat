@@ -1,12 +1,12 @@
 public class MazeGenerator {
 	//thomas can you go through and make thse variables fit codeing conventions pls :)
-	private int width;
-	private int height;
-	int start_X;
-	int start_Y;
-	int end_X;
-	int end_Y;
-	MazeTile[][] board;
+	public int width;
+	public int height;
+	private int start_X;
+	private int start_Y;
+	private int end_X;
+	private int end_Y;
+	private MazeTile[][] board;
 
 	public MazeGenerator(int width, int height, int start_X, int start_Y, int end_X, int end_Y) {
 		//initializes the board.
@@ -18,8 +18,8 @@ public class MazeGenerator {
 		this.end_Y = end_Y;
 		board = new MazeTile[width][height];
 		initialize();
+
 	}
-	
 	public void initialize() {
 		for (int i = 0; i < width; i++) {
 			for (int x = 0; x < height; x++) {
@@ -33,8 +33,8 @@ public class MazeGenerator {
 		int y = start_Y;
 		int spaces = 0;
 		//System.out.println(board.size());
-		board[0][0].setStart();
-		board[5][5].setExit();
+		board[start_X][start_Y].setStart();
+		board[end_X][end_Y].setExit();
 		boolean works = false;
 		boolean alternate = false;
 		//Creates the board
@@ -283,46 +283,50 @@ public class MazeGenerator {
 				}
 			}
 		}
+		printBoard();
+	}
 //-------------------PRINTS OUT BOARD--------------------------------------
-		int space = 0;
-		for (int u = 0; u <= height; u++) {
-			System.out.print("##");
-		}
-		System.out.println("#");
-		for (int c = 0; c < width; c++) {
-			System.out.print("# ");
-			for (int u = 0; u < height; u++) {
-				if (board[c][u].getThere()) {
-					if (board[c][u].getStart()) {
-						System.out.print("S ");
-					} else if (board[c][u].getExit()) {
-						System.out.print("E ");
+		public void printBoard(){
+			int space = 0;
+			//for (int u = 0; u <= height; u++) {
+				//System.out.print("##");
+			//}
+			//System.out.println("#");
+			for (int c = 0; c < width; c++) {
+				//System.out.print("# ");
+				for (int u = 0; u < height; u++) {
+					if (board[c][u].getThere()) {
+						// if (board[c][u].getStart()) {
+						// 	System.out.print("S ");
+						// } else if (board[c][u].getExit()) {
+						// 	System.out.print("E ");
+						// } else {
+						// 	System.out.print("  ");
+						// }
+						space++;
+					} else if (board[c][u].getIsAdjacent()){
+						//System.out.print("# ");
+						//--------------------------NECESSARY-------------------------------------
+						board[c][u].setWall();					
+						//------------------------------------------------------------------------
 					} else {
-						System.out.print("  ");
+						//System.out.print("# ");
+						//---------------------------NECESSARY-------------------------------------
+						board[c][u].setWall();
+						//------------------------------------------------------------------------
 					}
-					space++;
-				} else if (board[c][u].getIsAdjacent()){
-					System.out.print("# ");
-					//--------------------------NECESSARY-------------------------------------
-					board[c][u].setWall();					
-					//------------------------------------------------------------------------
-				} else {
-					System.out.print("# ");
-					//---------------------------NECESSARY-------------------------------------
-					board[c][u].setWall();
-					//------------------------------------------------------------------------
 				}
+				System.out.println("#");
 			}
-			System.out.println("#");
-		}
-		for (int u = 0; u <= height; u++) {
-			System.out.print("##");
-		}
+			for (int u = 0; u <= height; u++) {
+				System.out.print("##");
+			}
 		System.out.println("#");
 		System.out.println();
 		System.out.println(space);
 //------------------------------------------------------------------------
-	}
+		}
+	
 	
 	//tests if the maze works
 	public boolean test(int spaces) {
