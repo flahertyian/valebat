@@ -69,16 +69,16 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	}
 
 	private String direction(MazeTile[][] b,int x,int y){
-		if(!b[x][y-1].getWall()){
+		if(!b[y-1][x].getWall()){
 			return "north";
-		}else if(!b[x-1][y].getWall()){
+		}else if(!b[y][x-1].getWall()){
 			return "west";
-		}else if(!b[x+1][y].getWall()){
+		}else if(!b[y][x+1].getWall()){
 			return "east";
-		}else if(!b[x][y+1].getWall()){
+		}else if(!b[y+1][x].getWall()){
 			return "south";
 		}else{
-			return "oops1";
+			return "i fucked up somehow";
 		}
 
 
