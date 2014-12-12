@@ -88,6 +88,9 @@ public class MazeTile {
 		boolean[] directions = {hasNorth, hasSouth, hasEast, hasWest};
 		return directions;
 	}
+	public boolean getIsPlayer(){
+		return containsPlayer;
+	}
 
 	public void setNorth() {
 		hasNorth = true;

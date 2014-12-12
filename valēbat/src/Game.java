@@ -19,7 +19,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		setFocusable(true);
 		setPreferredSize(new Dimension(boardSizeX,boardSizeY));//1200,800
 		addKeyListener(this);
-		MazeGenerator abyss = new MazeGenerator(10,10,startX,startY,5,5);
+		MazeGenerator abyss = new MazeGenerator(50,50,startX,startY,30,30);
 		int height = abyss.height;
 		int width =	abyss.width;
 		MazeTile[][] b = abyss.getBoard();
@@ -37,8 +37,8 @@ public class Game extends JPanel implements Runnable,KeyListener{
 			System.out.print("# ");
 			for (int u = 0; u < height; u++) {
 				if (b[c][u].getThere()) {
-					if (b[c][u].getStart()) {
-						System.out.print("S ");
+					if (b[c][u].getIsPlayer()) {
+						System.out.print("p ");
 					} else if (b[c][u].getExit()) {
 							System.out.print("E ");
 					} else {
