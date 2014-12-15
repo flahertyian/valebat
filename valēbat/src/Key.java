@@ -15,11 +15,12 @@ public class Key {
 	}
 	// updates prev boolean arr
 	public static void update(){
-		for(int p = 0; p < 4 ; p++){
+		for(int p = 0; p < 5 ; p++){
 			if(p == 0)prev[KeyEvent.VK_LEFT] = pressed[KeyEvent.VK_LEFT];
 			if(p == 1)prev[KeyEvent.VK_RIGHT] = pressed[KeyEvent.VK_RIGHT];
 			if(p == 2)prev[KeyEvent.VK_UP] = pressed[KeyEvent.VK_UP];
 			if(p == 3)prev[KeyEvent.VK_DOWN] = pressed[KeyEvent.VK_DOWN];
+			if(p == 4)prev[KeyEvent.VK_SPACE]=pressed[KeyEvent.VK_SPACE];
 		}
 	
 	}

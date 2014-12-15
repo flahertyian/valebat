@@ -304,17 +304,12 @@ public class MazeGenerator {
 						// 	System.out.print("  ");
 						// }
 						space++;
-					} else if (board[c][u].getIsAdjacent()){
+					} else{
 						//System.out.print("# ");
 						//--------------------------NECESSARY-------------------------------------
 						board[c][u].setWall();					
 						//------------------------------------------------------------------------
-					} else {
-						//System.out.print("# ");
-						//---------------------------NECESSARY-------------------------------------
-						board[c][u].setWall();
-						//------------------------------------------------------------------------
-					}
+					} 
 				}
 				System.out.println("#");
 			}

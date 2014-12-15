@@ -87,19 +87,21 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	private void update(){
 		// where the key code is input
 		if(Key.typed(KeyEvent.VK_UP)){
-			System.out.println("up");
+			System.out.println("Up");
 		}if(Key.typed(KeyEvent.VK_DOWN)){
-			System.out.println("down");
+			System.out.println("Down");
 		}if(Key.typed(KeyEvent.VK_LEFT)){
-			System.out.println("left");
+			System.out.println("Left");
 		}if(Key.typed(KeyEvent.VK_RIGHT)){
-			System.out.println("right");
+			System.out.println("Right");
+		}if(Key.typed(KeyEvent.VK_SPACE)){
+			System.out.println("Space");
 		}
 		Key.update();
 	}
 	private void render(){ //used to render the graphics
 		Graphics2D g2d = (Graphics2D) getGraphics();
-		DrawTile tile = new DrawTile(g2d);
+		DrawView View = new DrawView(g2d);
 		g2d.setColor(Color.BLUE);
 		g2d.fillRect(50, 50, 100, 100);
 		g2d.dispose();
