@@ -1,5 +1,4 @@
 public class MazeGenerator {
-	//thomas can you go through and make thse variables fit codeing conventions pls :)
 	public int width;
 	public int height;
 	private int start_X;
