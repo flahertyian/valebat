@@ -1,20 +1,20 @@
 public class MazeGenerator {
 	public int width;
 	public int height;
-	private int start_X;
-	private int start_Y;
-	private int end_X;
-	private int end_Y;
+	private int startX;
+	private int startY;
+	private int endX;
+	private int endY;
 	private MazeTile[][] board;
 
-	public MazeGenerator(int width, int height, int start_X, int start_Y, int end_X, int end_Y) {
+	public MazeGenerator(int width, int height, int startX, int startY, int endX, int endY) {
 		//initializes the board.
 		this.width = width;
 		this.height = height;
-		this.start_X = start_X;
-		this.start_Y = start_Y;
-		this.end_X = end_X;
-		this.end_Y = end_Y;
+		this.startX = startX;
+		this.startY = startY;
+		this.endX = endX;
+		this.endY = endY;
 		board = new MazeTile[width][height];
 		initialize();
 
@@ -28,12 +28,12 @@ public class MazeGenerator {
 		}
 		int backs = 0;
 		int track = 0;
-		int x = start_X;
-		int y = start_Y;
+		int x = startX;
+		int y = startY;
 		int spaces = 0;
 		//System.out.println(board.size());
-		board[start_X][start_Y].setStart();
-		board[end_X][end_Y].setExit();
+		board[startX][startY].setStart();
+		board[endX][endY].setExit();
 		boolean works = false;
 		boolean alternate = false;
 		//Creates the board
@@ -45,8 +45,8 @@ public class MazeGenerator {
 			//If it reaches the end of the maze, go back to the start
 			if (board[x][y].getExit()) {
 				board[x][y].setThere();
-				x = start_X;
-				y = start_Y;	
+				x = startX;
+				y = startY;	
 			}
 			//if the maze can't be finished (determined by having had to backtrack 10 * the area of the map)...
 			//...it resets the maze so that it can try again
@@ -55,8 +55,8 @@ public class MazeGenerator {
 				backs = 0;
 				spaces = 0;
 				//puts the generator back at the start
-				x = start_X;
-				y = start_Y;	
+				x = startX;
+				y = startY;	
 		        //lets us know it happened
 				track++;
 				System.out.println(track);
@@ -340,7 +340,7 @@ public class MazeGenerator {
 //		System.out.println();
 //		System.out.println();
 //------------------------------------------------------------------------
-		boolean works = (board[end_X][end_Y].getThere() && spaces > ((height * width) / 3));
+		boolean works = (board[endX][endY].getThere() && spaces > ((height * width) / 2));
 		return works;
 	}
 	
