@@ -22,7 +22,7 @@ public class MazeGenerator {
 	public void initialize() {
 		for (int i = 0; i < width; i++) {
 			for (int x = 0; x < height; x++) {
-				System.out.println(i +  "|" + x);
+//				System.out.println(i +  "|" + x);
 				board[i][x] = new MazeTile();
 			}
 		}
