@@ -60,7 +60,12 @@ public class MazeGenerator {
 		        //lets us know it happened
 				track++;
 				System.out.println(track);
-				
+				for (int i = 0; i < width; i++) {
+					for (int o = 0; o < height; o++) {
+						board[i][o].resetAdjacent();
+						board[i][o].resetThere();						
+					}
+				}
 			}
 			//they check if there are unvisited adjacent spaces
 			if (x > 1) {
@@ -282,6 +287,7 @@ public class MazeGenerator {
 				}
 			}
 		}
+		System.out.println("Maze is done!");
 		//printBoard();
 	}
 //-------------------PRINTS OUT BOARD--------------------------------------
