@@ -15,7 +15,7 @@ public class MazeGenerator {
 		this.startY = startY;
 		this.endX = endX;
 		this.endY = endY;
-		board = new MazeTile[width][height];
+		board = new MazeTile[width + 2][height + 2];
 		initialize();
 
 	}
@@ -63,16 +63,16 @@ public class MazeGenerator {
 				
 			}
 			//they check if there are unvisited adjacent spaces
-			if (x != 0) {
+			if (x > 1) {
 				one = (!board[x-1][y].getIsAdjacent() && !board[x-1][y].getThere());
 			}
-			if (x != width - 1) {
+			if (x < width - 2) {
 				two = (!board[x+1][y].getIsAdjacent() && !board[x+1][y].getThere());
 			}
-			if (y != 0) {
+			if (y > 1) {
 				three = (!board[x][y-1].getIsAdjacent() && !board[x][y-1].getThere());
 			}
-			if (y != height - 1) {
+			if (y < height - 2) {
 				four = (!board[x][y+1].getIsAdjacent() && !board[x][y+1].getThere());
 			}
 			//if there is at least 1 available adjacent space
@@ -85,22 +85,22 @@ public class MazeGenerator {
 				while (maybeX == 0 && maybeY == 0) {
 					boolean exited = false;
 					//makes it so if the adjacent space is the end, it goes there 
-					if(x != 0) {
+					if(x > 1) {
 						if(board[x-1][y].getExit() && !board[x-1][y].getThere()) {
 							maybeX = -1;
 							exited = true;
 						}
-					} if(x != width - 1) {
+					} if(x < width - 2) {
 						if(board[x+1][y].getExit() && !board[x+1][y].getThere()) {
 							exited = true;
 							maybeX = 1;
 						}
-					} if(y != 0) {
+					} if(y > 1) {
 						if(board[x][y-1].getExit() && !board[x][y-1].getThere()) {
 							exited = true;
 							maybeY = -1;
 						}
-					} if(y != height - 1) {
+					} if(y < height - 2) {
 						if(board[x][y+1].getExit() && !board[x][y+1].getThere()) {
 							exited = true;
 							maybeY = 1;
@@ -117,7 +117,7 @@ public class MazeGenerator {
 								//x will be -1, 0, or 1
 								maybeX = (int)(Math.random() * 4 - 2);
 								//if the value for x doesn't work...
-								if ((maybeX == -1 && x == 0) || (maybeX == 1 && x == width - 1)) {
+								if ((maybeX == -1 && x < 2) || (maybeX == 1 && x > width - 3)) {
 									//maybeX resets
 									maybeX = 0;
 								}
@@ -129,7 +129,7 @@ public class MazeGenerator {
 								//y will be -1, 0, or 1
 								maybeY = (int)(Math.random() * 4 - 2);
 								//if the value for y doesn't work...
-								if ((maybeY == -1 && y == 0) || (maybeY == 1 && y == height - 1)) {
+								if ((maybeY == -1 && y < 2) || (maybeY == 1 && y > height - 3)) {
 									//maybeY resets
 									maybeY = 0;
 								}
@@ -212,7 +212,7 @@ public class MazeGenerator {
 				while (!hasMoved) {
 					int direct = (int) (Math.random() * 4);
 					if (direct == 0) {
-						if (x != 0) {
+						if (x > 1) {
 							//if you can move west, do so
 							if (board[x-1][y].getThere() && !hasMoved) {
 								board[x][y].setThere();
@@ -222,7 +222,7 @@ public class MazeGenerator {
 						}
 					}
 					if (direct == 1) {
-						if (y != height - 1) {
+						if (y < height - 2) {
 							//if you can move north and haven't moved, do so
 							if (board[x][y+1].getThere() && !hasMoved) {
 								board[x][y].setThere();
@@ -232,7 +232,7 @@ public class MazeGenerator {
 						}
 					}
 					if (direct == 2) {
-						if (x != width - 1) {
+						if (x < width - 2) {
 							//if you can move East and haven't moved, do so
 							if (board[x+1][y].getThere() && !hasMoved) {
 								board[x][y].setThere();
@@ -242,7 +242,7 @@ public class MazeGenerator {
 						}
 					}
 					if (direct == 3) {
-						if (y != 0) {
+						if (y > 1) {
 							//if you can move south and haven't moved, do so
 							if (board[x][y-1].getThere() && !hasMoved) {
 								board[x][y].setThere();
@@ -282,7 +282,7 @@ public class MazeGenerator {
 				}
 			}
 		}
-		printBoard();
+		//printBoard();
 	}
 //-------------------PRINTS OUT BOARD--------------------------------------
 		public void printBoard(){
