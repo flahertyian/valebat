@@ -29,12 +29,8 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	}
 	public void printBoard(MazeTile[][] b,int height,int width){
 	int space = 0;
-		for (int u = 0; u <= height; u++) {
-				System.out.print("##");
-		}
-		System.out.println("#");
+
 		for (int c = 0; c < width; c++) {
-			System.out.print("# ");
 			for (int u = 0; u < height; u++) {
 				if (b[c][u].getThere()) {
 					if (b[c][u].getIsPlayer()) {
@@ -47,35 +43,23 @@ public class Game extends JPanel implements Runnable,KeyListener{
 					space++;
 				} else if (b[c][u].getIsAdjacent()){
 					System.out.print("# ");
-						//--------------------------NECESSARY-------------------------------------
-						//board[c][u].setWall();					
-						//------------------------------------------------------------------------
-				} else {
-					System.out.print("# ");
-						//---------------------------NECESSARY-------------------------------------
-						//board[c][u].setWall();
-						//------------------------------------------------------------------------
-				}
+				} 
 			}
-			System.out.println("#");
 		}
-		for (int u = 0; u <= height; u++) {
-			System.out.print("##");
-		}
-	System.out.println("#");
+
 	System.out.println();
 	System.out.println(space);
 //------------------------------------------------------------------------
 	}
 
 	private String direction(MazeTile[][] b,int x,int y){
-		if(!b[y-1][x].getWall()){
+		if(!b[x-1][y].getWall()){
 			return "north";
-		}else if(!b[y][x-1].getWall()){
+		}else if(!b[x][y-1].getWall()){
 			return "west";
-		}else if(!b[y][x+1].getWall()){
+		}else if(!b[x][y+1].getWall()){
 			return "east";
-		}else if(!b[y+1][x].getWall()){
+		}else if(!b[x+1][y].getWall()){
 			return "south";
 		}else{
 			return "i fucked up somehow";
@@ -101,7 +85,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	}
 	private void render(){ //used to render the graphics
 		Graphics2D g2d = (Graphics2D) getGraphics();
-		DrawView View = new DrawView(g2d);
+		DrawView View = new DrawView(g2d,boardSizeX,boardSizeY);
 		g2d.setColor(Color.BLUE);
 		g2d.fillRect(50, 50, 100, 100);
 		g2d.dispose();
