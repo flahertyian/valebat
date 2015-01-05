@@ -288,7 +288,7 @@ public class MazeGenerator {
 			}
 		}
 		System.out.println("Maze is done!");
-		//printBoard();
+		printBoard();
 	}
 //-------------------PRINTS OUT BOARD--------------------------------------
 		public void printBoard(){
@@ -316,14 +316,14 @@ public class MazeGenerator {
 						//------------------------------------------------------------------------
 					} 
 				}
-				System.out.println("#");
+//				System.out.println("#");
 			}
-			for (int u = 0; u <= height; u++) {
-				System.out.print("##");
-			}
-		System.out.println("#");
-		System.out.println();
-		System.out.println(space);
+//			for (int u = 0; u <= height; u++) {
+//				System.out.print("##");
+//			}
+//		System.out.println("#");
+//		System.out.println();
+//		System.out.println(space);
 //------------------------------------------------------------------------
 		}
 	

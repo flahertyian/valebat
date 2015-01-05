@@ -1,7 +1,6 @@
 import javax.swing.JFrame;
 
 public class Runner extends JFrame {
-
 	public static void main(String[]args){
 		System.out.println("Start");
 		Game game = new Game();

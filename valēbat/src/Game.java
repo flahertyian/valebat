@@ -41,10 +41,11 @@ public class Game extends JPanel implements Runnable,KeyListener{
 						System.out.print("  ");
 					}
 					space++;
-				} else if (b[c][u].getIsAdjacent()){
+				} else {
 					System.out.print("# ");
 				} 
 			}
+			System.out.println();
 		}
 
 	System.out.println();
