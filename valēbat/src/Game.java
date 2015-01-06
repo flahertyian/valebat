@@ -52,6 +52,86 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	System.out.println(space);
 //------------------------------------------------------------------------
 	}
+	
+	public int getPosition(MazeTile[][] b, int x, int y) {
+		int position = 0;
+		int forward = 0;
+		boolean dirLeft = false;
+		boolean forLeft = false;
+		boolean dirFor = false;
+		boolean forRight = false;
+		boolean dirRight = false;
+		if (/*east*/) {
+			forward = 1;
+		} else if (/*south*/) {
+			forward = 2;
+		} else if (/*west*/) {
+			forward = 3;
+		}
+		if (forward == 0) {
+			dirLeft = !b[x - 1][y].getWall();
+			forLeft = !b[x - 1][y - 1].getWall();
+			dirFor = !b[x][y - 1].getWall();
+			forRight = !b[x + 1][y - 1].getWall();
+			dirRight = !b[x + 1][y].getWall();
+		} else if (forward == 1) {
+			dirLeft = !b[x][y - 1].getWall();
+			forLeft = !b[x + 1][y - 1].getWall();
+			dirFor = !b[x + 1][y].getWall();
+			forRight = !b[x + 1][y + 1].getWall();
+			dirRight = !b[x][y + 1].getWall();
+		} else if (forward == 2) {
+			dirLeft = !b[x - 1][y].getWall();
+			forLeft = !b[x - 1][y + 1].getWall();
+			dirFor = !b[x][y + 1].getWall();
+			forRight = !b[x + 1][y + 1].getWall();
+			dirRight = !b[x + 1][y].getWall();
+		} else {
+			dirLeft = !b[x][y + 1].getWall();
+			forLeft = !b[x - 1][y + 1].getWall();
+			dirFor = !b[x - 1][y].getWall();
+			forRight = !b[x - 1][y - 1].getWall();
+			dirRight = !b[x][y - 1].getWall();
+		}
+		if (dirLeft) {
+			if (dirFor) {
+				if (dirRight) {
+					position = 8;
+				} else if (forRight) {
+					position = 7;
+				} else {
+					position = 11;
+				}
+			} else {
+				if (dirRight) {
+					position = 10;
+				} else {
+					position = 3;
+				}
+			}
+		} else if (dirFor) {
+			if (forLeft) {
+				if (forRight) {
+					position = 9;
+				} else if (dirRight) {
+					position = 6;
+				} else {
+					position = 4;
+				}
+			} else if (forRight) {
+				position = 5;
+			} else {
+				position = 1;
+			}
+		} else if (dirRight) {
+			if (dirFor) {
+				position = 12;
+			} else {
+				position = 2;
+			}
+		}
+		return position;
+	}
 
 	private String direction(MazeTile[][] b,int x,int y){
 		if(!b[x-1][y].getWall()){
