@@ -26,7 +26,7 @@ public class DrawView {
 			//add try{ catch(MalformedURLException ex){ }}
 			case 0:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/deadEnd.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -34,7 +34,7 @@ public class DrawView {
 				break;
 			case 1:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/farDeadEnd.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -42,7 +42,7 @@ public class DrawView {
 				break;
 			case 2:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/RightOpen.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -50,7 +50,7 @@ public class DrawView {
 				break;
 			case 3:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/LeftOpen.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -58,7 +58,7 @@ public class DrawView {
 				break;
 			case 4:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/farLeftTurn.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -66,7 +66,7 @@ public class DrawView {
 				break;
 			case 5:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/farRightTurn.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -74,7 +74,7 @@ public class DrawView {
 				break;
 			case 6:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/rightCloseFarLeft.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -82,7 +82,7 @@ public class DrawView {
 				break;
 			case 7:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/leftCloseFarRight.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -90,7 +90,7 @@ public class DrawView {
 				break;
 			case 8:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/fork.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -98,7 +98,7 @@ public class DrawView {
 				break;
 			case 9:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/farT.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -106,7 +106,7 @@ public class DrawView {
 				break;
 			case 10:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/T.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -114,7 +114,7 @@ public class DrawView {
 				break;
 			case 11:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/closerLeftTurn.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -122,12 +122,19 @@ public class DrawView {
 				break;
 			case 12:
 				try{
-					url = new URL("../resource/");			
+					url = new URL("../resource/CloseRightTurn.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
 				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
 				break;
+			case 13:{
+				try{
+					url = new URL("../resource/Hall.png");
+				}catch(MalformedURLException ex){
+					System.err.println("MalformedURLException");
+				}
+			}
 		}
 		g2d = currentView.createGraphics();
 	}
