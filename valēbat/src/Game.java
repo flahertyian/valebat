@@ -176,8 +176,8 @@ public class Game extends JPanel implements Runnable,KeyListener{
 
 	private void playerMove(){
 		//old player location befor move
-		int pX = player.LOC_X
-		int pY = player.LOC_Y
+		int pX = player.LOC_X;
+		int pY = player.LOC_Y;
 		//player moves
 		player.move(direction);
 		//new player location after move
