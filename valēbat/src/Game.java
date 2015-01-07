@@ -27,6 +27,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		b[startX][startY].addPlayer();
 		printBoard(b,height,width);
 	}
+	
 	public void printBoard(MazeTile[][] b,int height,int width){
 	int space = 0;
 
@@ -47,51 +48,48 @@ public class Game extends JPanel implements Runnable,KeyListener{
 			}
 			System.out.println();
 		}
-
 	System.out.println();
 	System.out.println(space);
 //------------------------------------------------------------------------
 	}
 	
-	public int getPosition(MazeTile[][] b, int x, int y) {
+	//takes the board and returns an int 1 to 12
+	//dictating which image to pull up for the player to see.
+	public int getPosition(MazeTile[][] b) {
+		int x = player.LOC_X;
+		int y = player.LOC_Y;
 		int position = 0;
-		int forward = 0;
 		boolean dirLeft = false;
 		boolean forLeft = false;
 		boolean dirFor = false;
 		boolean forRight = false;
 		boolean dirRight = false;
-		if (/*east*/) {
-			forward = 1;
-		} else if (/*south*/) {
-			forward = 2;
-		} else if (/*west*/) {
-			forward = 3;
-		}
-		if (forward == 0) {
+		if (direction == 0) {
 			dirLeft = !b[x - 1][y].getWall();
 			forLeft = !b[x - 1][y - 1].getWall();
 			dirFor = !b[x][y - 1].getWall();
 			forRight = !b[x + 1][y - 1].getWall();
 			dirRight = !b[x + 1][y].getWall();
-		} else if (forward == 1) {
+		} else if (direction == 1) {
 			dirLeft = !b[x][y - 1].getWall();
 			forLeft = !b[x + 1][y - 1].getWall();
 			dirFor = !b[x + 1][y].getWall();
 			forRight = !b[x + 1][y + 1].getWall();
 			dirRight = !b[x][y + 1].getWall();
-		} else if (forward == 2) {
+		} else if (direction == 2) {
 			dirLeft = !b[x - 1][y].getWall();
 			forLeft = !b[x - 1][y + 1].getWall();
 			dirFor = !b[x][y + 1].getWall();
 			forRight = !b[x + 1][y + 1].getWall();
 			dirRight = !b[x + 1][y].getWall();
-		} else {
+		} else if (direction == 3) {
 			dirLeft = !b[x][y + 1].getWall();
 			forLeft = !b[x - 1][y + 1].getWall();
 			dirFor = !b[x - 1][y].getWall();
 			forRight = !b[x - 1][y - 1].getWall();
 			dirRight = !b[x][y - 1].getWall();
+		} else {
+			System.out.println("I fucked up and Thomas is probably to blame unless Ian is.");
 		}
 		if (dirLeft) {
 			if (dirFor) {
@@ -164,6 +162,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		}
 		Key.update();
 	}
+	
 	private void render(){ //used to render the graphics
 		Graphics2D g2d = (Graphics2D) getGraphics();
 		DrawView View = new DrawView(g2d,boardSizeX,boardSizeY);
@@ -212,12 +211,14 @@ public class Game extends JPanel implements Runnable,KeyListener{
 			System.out.println("thanks for playing");
 		}
 	}
+	
 	public synchronized void start(){
 		if(running) return;
 		running = true;
 		game = new Thread(this, "game");
 		game.start();
 	}
+	
 	public synchronized void end(){
 		if(!running) return;
 		running = false;
@@ -229,9 +230,11 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	public void keyPressed(KeyEvent e) {
 		Key.keyPressed(e);
 	}
+	
 	public void keyReleased(KeyEvent e) {
 		Key.keyReleased(e);
 	}
+	
 	public void keyTyped(KeyEvent e) {}
 	// not used
 }
