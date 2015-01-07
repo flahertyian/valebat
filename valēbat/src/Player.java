@@ -3,8 +3,8 @@ public class Player {
 	private int health;
 	private int attack;
 	private int direction; 
-	private int LOC_X;
-	private int LOC_Y;
+	public int LOC_X;
+	public int LOC_Y;
 	private MazeTile[][] b;
 	//constructer for the player class: attack, direction and the board;
 	public Player(int health,int attack,String direction,MazeTile[][] b,int locX,int locY){
@@ -18,7 +18,7 @@ public class Player {
 	}
 
 	//called to test if the next move is occupied with a tile
-	public boolean testOption(int direction){
+	public boolean move(int direction){
 		int c = 1;
 		if(direction == 0){
 			if(!b[LOC_X][LOC_Y-c].getWall()){
@@ -41,6 +41,7 @@ public class Player {
 		}
 		return true;
 	}
+
 	public void changeDirection(int d){
 		direction = d;
 	}
@@ -49,22 +50,27 @@ public class Player {
 	public void attack(Creature c){
 		c.damage(attack);
 	}
+
 	//returns the value of attack
 	public int getAttack(){
 		return this.attack;
 	}
+
 	//called with the player takes damage 
 	public void damage(int damage){
 		this.health -= damage;
 	}
+
 	//returns the health of the player
 	public int getHealth(){
 		return this.health;
 	}
+
 	//returns the direction the player is facing
 	public String getDirection(){
 		return direction;
 	}
+
 	public boolean gameOverTest(){
 		if(this.health <= 0){
 			return true;

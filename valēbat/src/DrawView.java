@@ -12,10 +12,12 @@ public class DrawView {
 	Graphics2D g2d;
 	int boardSizeY;
 	int boardSizeX;
+	int pos;
 	URL url;
 	BufferedImage currentView;
-	public DrawView(Graphics2D g2d){
+	public DrawView(Graphics2D g2d,int pos){
 		this.g2d = g2d;
+		pos = pos;
 		url = null;
 		currentView = null;
 		makeView();
