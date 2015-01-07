@@ -14,12 +14,11 @@ public class DrawView {
 	int boardSizeX;
 	URL url;
 	BufferedImage currentView;
-	public DrawView(Graphics2D g2d,int boardSizeX, int boardSizeY){
+	public DrawView(Graphics2D g2d){
 		this.g2d = g2d;
-		this.boardSizeY = boardSizeY;
-		this.boardSizeX = boardSizeX;
 		url = null;
 		currentView = null;
+		makeView();
 	}
 	public void makeView(int pos){
 		switch(pos){
@@ -34,7 +33,7 @@ public class DrawView {
 				break;
 			case 1:
 				try{
-					url = new URL("../resource/farDeadEnd.png");			
+					url = new URL("../resource/Hall.png");			
 				}catch(MalformedURLException ex){
 					System.err.println("MalformedURLException");
 				}
@@ -128,13 +127,6 @@ public class DrawView {
 				}
 				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
 				break;
-			case 13:{
-				try{
-					url = new URL("../resource/Hall.png");
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-			}
 		}
 		g2d = currentView.createGraphics();
 	}

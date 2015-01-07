@@ -11,9 +11,12 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	//private boolean gameOverTest;
 	public static final int boardSizeX = 1200;
 	public static final int boardSizeY = 800;
-	private Thread game;
+	private Thread game; //butt
+	private int direction; //the previus direction of the player
+	private Player player;
 
 	public Game(){
+		direction = null;
 		int startX=1;
 		int startY=1;
 		setFocusable(true);
@@ -23,10 +26,12 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		int height = abyss.height;
 		int width =	abyss.width;
 		MazeTile[][] b = abyss.getBoard();
-		Player player = new Player(10, 5, direction(b,startX,startY),b,startX,startY);
+		player = new Player(10, 5, firstDirection(b,startX,startY),b,startX,startY);
 		b[startX][startY].addPlayer();
+
 		printBoard(b,height,width);
 	}
+
 	public void printBoard(MazeTile[][] b,int height,int width){
 	int space = 0;
 
@@ -133,43 +138,88 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		return position;
 	}
 
-	private String direction(MazeTile[][] b,int x,int y){
+	private String firstDirection(MazeTile[][] b,int x,int y){
 		if(!b[x-1][y].getWall()){
+			direction = 0;
 			return "north";
 		}else if(!b[x][y-1].getWall()){
+			direction = 3;
 			return "west";
 		}else if(!b[x][y+1].getWall()){
+			direction = 1;
 			return "east";
 		}else if(!b[x+1][y].getWall()){
+			direction = 2;
 			return "south";
 		}else{
 			return "i fucked up somehow";
 		}
+	}
 
+	private void playerTurn(boolean rightOrLeft){
+		if(rightOrLeft){//right turn
+			if(direction != 3){
+				player.changeDirection(direction + 1);
+			}else{
+				direction = 0;
+				player.changeDirection(direction);
+			}
+		}else{//left turn
+			if(direction != 0){
+				player.changeDirection(direction - 1);
+			}else{
+				direction = 3;
+				player.changeDirection(direction);
+			}
+		}
+	}
 
+	private void playerMove(){
+		//old player location befor move
+		int pX = player.LOC_X
+		int pY = player.LOC_Y
+		//player moves
+		player.move(direction);
+		//new player location after move
+		pXnew = player.LOC_X;
+		pYnew = player.LOC_Y;
+		//updates board with player location
+		updateBoard(pX,pY,pXnew,pYnew);
+	}
+
+	private void updateBoard(int pX, int pY, int pXnew, int pYnew){
+		//adds the player to the board
+		b[pXnew][pYnew].addPlayer();
+		//removes the players old location from the board
+		b[pX][pY].removePlayer();
 	}
 
 	private void update(){
 		// where the key code is input
 		if(Key.typed(KeyEvent.VK_UP)){
+			playerMove();
 			System.out.println("Up");
 		}if(Key.typed(KeyEvent.VK_DOWN)){
+			playerMove();
 			System.out.println("Down");
 		}if(Key.typed(KeyEvent.VK_LEFT)){
+			playerTurn(false);
 			System.out.println("Left");
 		}if(Key.typed(KeyEvent.VK_RIGHT)){
+			playerTurn(true);
 			System.out.println("Right");
 		}if(Key.typed(KeyEvent.VK_SPACE)){
 			System.out.println("Space");
 		}
 		Key.update();
 	}
+
 	private void render(){ //used to render the graphics
 		Graphics2D g2d = (Graphics2D) getGraphics();
 		DrawView View = new DrawView(g2d,boardSizeX,boardSizeY);
 		g2d.setColor(Color.BLUE);
 		g2d.fillRect(50, 50, 100, 100);
-		g2d.dispose();
+		DrawView = new DrawView(g2d,);
 	}
 
 	//game loop
