@@ -27,6 +27,9 @@ public class MazeTile {
 	public void addPlayer(){
 		containsPlayer = true;
 	}
+	public void removePlayer(){
+		containsPlayer = false;
+	}
 	//all are self-explanitory.
 	public void setAdjacent() {
 		isAdjacent = true;
