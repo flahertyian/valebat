@@ -22,9 +22,9 @@ public class DrawView {
 		currentView = null;
 		makeView();
 	}
-	public void makeView(int pos){
+
+	public void makeView(){
 		switch(pos){
-			//add try{ catch(MalformedURLException ex){ }}
 			case 0:
 				try{
 					url = new URL("../resource/deadEnd.png");			
@@ -133,7 +133,7 @@ public class DrawView {
 		g2d = currentView.createGraphics();
 	}
 	
-	public Graphics2D getView(){
+	public Graphics2D getGraphics(){
 		return g2d;
 	}
 }

@@ -14,22 +14,31 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	private Thread game; //butt
 	private int direction; //the previus direction of the player
 	private Player player;
-
+	private int curPos;
 	public Game(){
+		//the direction of the player
 		direction = null;
+		//start point of the player
 		int startX=1;
 		int startY=1;
+		//jFrame and listener stuff
 		setFocusable(true);
 		setPreferredSize(new Dimension(boardSizeX,boardSizeY));//1200,800
 		addKeyListener(this);
+		//makes board
 		MazeGenerator abyss = new MazeGenerator(50,50,startX,startY,30,30);
+		//size of the board
 		int height = abyss.height;
 		int width =	abyss.width;
+		//makes board
 		MazeTile[][] b = abyss.getBoard();
+		//makes player
 		player = new Player(10, 5, firstDirection(b,startX,startY),b,startX,startY);
+		//adds player to start point
 		b[startX][startY].addPlayer();
-
+		//prints board
 		printBoard(b,height,width);
+		curPos = getPosition();
 	}
 
 	public void printBoard(MazeTile[][] b,int height,int width){
@@ -58,34 +67,28 @@ public class Game extends JPanel implements Runnable,KeyListener{
 //------------------------------------------------------------------------
 	}
 	
-	public int getPosition(MazeTile[][] b, int x, int y) {
+	public int getPosition(MazeTile[][] b) {
+		int x = player.LOC_X;
+		int y = player.LOC_Y;
 		int position = 0;
-		int forward = 0;
 		boolean dirLeft = false;
 		boolean forLeft = false;
 		boolean dirFor = false;
 		boolean forRight = false;
 		boolean dirRight = false;
-		if (/*east*/) {
-			forward = 1;
-		} else if (/*south*/) {
-			forward = 2;
-		} else if (/*west*/) {
-			forward = 3;
-		}
-		if (forward == 0) {
+		if (direction == 0) {
 			dirLeft = !b[x - 1][y].getWall();
 			forLeft = !b[x - 1][y - 1].getWall();
 			dirFor = !b[x][y - 1].getWall();
 			forRight = !b[x + 1][y - 1].getWall();
 			dirRight = !b[x + 1][y].getWall();
-		} else if (forward == 1) {
+		} else if (direction == 1) {
 			dirLeft = !b[x][y - 1].getWall();
 			forLeft = !b[x + 1][y - 1].getWall();
 			dirFor = !b[x + 1][y].getWall();
 			forRight = !b[x + 1][y + 1].getWall();
 			dirRight = !b[x][y + 1].getWall();
-		} else if (forward == 2) {
+		} else if (direction == 2) {
 			dirLeft = !b[x - 1][y].getWall();
 			forLeft = !b[x - 1][y + 1].getWall();
 			dirFor = !b[x][y + 1].getWall();
@@ -138,22 +141,17 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		return position;
 	}
 
-	private String firstDirection(MazeTile[][] b,int x,int y){
+	private int firstDirection(MazeTile[][] b,int x,int y){
 		if(!b[x-1][y].getWall()){
-			direction = 0;
-			return "north";
+			direction = 0
 		}else if(!b[x][y-1].getWall()){
 			direction = 3;
-			return "west";
 		}else if(!b[x][y+1].getWall()){
 			direction = 1;
-			return "east";
 		}else if(!b[x+1][y].getWall()){
 			direction = 2;
-			return "south";
-		}else{
-			return "i fucked up somehow";
 		}
+		return direction;
 	}
 
 	private void playerTurn(boolean rightOrLeft){
@@ -181,8 +179,8 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		//player moves
 		player.move(direction);
 		//new player location after move
-		pXnew = player.LOC_X;
-		pYnew = player.LOC_Y;
+		int pXnew = player.LOC_X;
+		int pYnew = player.LOC_Y;
 		//updates board with player location
 		updateBoard(pX,pY,pXnew,pYnew);
 	}
@@ -213,13 +211,13 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		}
 		Key.update();
 	}
-
-	private void render(){ //used to render the graphics
+	
+	//used to render the graphics
+	private void render(){
 		Graphics2D g2d = (Graphics2D) getGraphics();
-		DrawView View = new DrawView(g2d,boardSizeX,boardSizeY);
+		DrawView View = new DrawView(g2d,curPos);
 		g2d.setColor(Color.BLUE);
 		g2d.fillRect(50, 50, 100, 100);
-		DrawView = new DrawView(g2d,);
 	}
 
 	//game loop

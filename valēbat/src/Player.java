@@ -7,7 +7,7 @@ public class Player {
 	public int LOC_Y;
 	private MazeTile[][] b;
 	//constructer for the player class: attack, direction and the board;
-	public Player(int health,int attack,String direction,MazeTile[][] b,int locX,int locY){
+	public Player(int health,int attack,int direction,MazeTile[][] b,int locX,int locY){
 		this.b = b;
 		this.attack = attack;
 		this.health = health;
@@ -33,7 +33,7 @@ public class Player {
 				LOC_Y += c;
 			}
 		}else if(direction == 3){
-			if(!b[LOC_X-c][LOC_Y]){
+			if(!b[LOC_X-c][LOC_Y].getWall()){
 				LOC_X-=c;
 			}
 		}
