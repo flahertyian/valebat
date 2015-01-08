@@ -17,9 +17,14 @@ public class DrawView {
 	BufferedImage currentView;
 	public DrawView(Graphics2D g2d,int pos){
 		this.g2d = g2d;
-		pos = pos;
+		this.pos = pos;
 		url = null;
 		currentView = null;
+		makeView();
+	}
+	public void updateView(Graphics2D g2d, int pos){
+		this.pos = pos;
+		this.g2d = g2d;
 		makeView();
 	}
 

@@ -283,3 +283,4 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	public void keyTyped(KeyEvent e) {}
 	// not used
 }
+
