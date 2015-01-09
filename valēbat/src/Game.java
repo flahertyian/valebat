@@ -32,18 +32,19 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		int width =	abyss.width;
 		//makes board
 		MazeTile[][] b = abyss.getBoard();
-		//makes player
-		player = new Player(10, 5, firstDirection(b,startX,startY),b,startX,startY);
+		//makes the first position
+		curPos = firstDirection(b,startX,startY);
+		//makes new player
+		player = new Player(10, 5, curPos,b,startX,startY);
 		//adds player to start point
 		b[startX][startY].addPlayer();
 		//prints board
 		printBoard(b,height,width);
-		curPos = getPosition();
 	}
 
+	//prints the current contense of current MazeTile[][] bs
 	public void printBoard(MazeTile[][] b,int height,int width){
-	int space = 0;
-
+		int space = 0;
 		for (int c = 0; c < width; c++) {
 			for (int u = 0; u < height; u++) {
 				if (b[c][u].getThere()) {
@@ -62,11 +63,13 @@ public class Game extends JPanel implements Runnable,KeyListener{
 			System.out.println();
 		}
 
-	System.out.println();
-	System.out.println(space);
-//------------------------------------------------------------------------
+		System.out.println();
+		System.out.println(space);
 	}
 	
+	//returns and int that represents the current view of the player 
+	//This int is betwean 0 - 12 There are 13 difrent possable views
+	//This int is used to decide which png to print to the Jpanel
 	public int getPosition(MazeTile[][] b) {
 		int x = player.LOC_X;
 		int y = player.LOC_Y;
@@ -141,6 +144,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		return position;
 	}
 
+	//returns the direction of the first player when the object is spawned into the game
 	private int firstDirection(MazeTile[][] b,int x,int y){
 		if(!b[x-1][y].getWall()){
 			direction = 0
@@ -154,6 +158,12 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		return direction;
 	}
 
+	//when the player turns it changes the int representitive of the comepus
+	//			 0
+	//			 N
+	//       3 W + E 1
+	//			 S
+	//			 2
 	private void playerTurn(boolean rightOrLeft){
 		if(rightOrLeft){//right turn
 			if(direction != 3){
