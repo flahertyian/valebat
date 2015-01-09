@@ -15,20 +15,16 @@ public class DrawView {
 	int pos;
 	URL url;
 	BufferedImage currentView;
-	public DrawView(Graphics2D g2d,int pos){
-		this.g2d = g2d;
-		this.pos = pos;
-		url = null;
-		currentView = null;
-		makeView();
+	public DrawView(){
+		
 	}
-	public void updateView(Graphics2D g2d, int pos){
+
+	public void setView(int pos){
 		this.pos = pos;
-		this.g2d = g2d;
 		makeView();
 	}
 
-	public void makeView(){
+	private void makeView(){
 		switch(pos){
 			case 0:
 				try{

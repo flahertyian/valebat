@@ -7,17 +7,32 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 public class Game extends JPanel implements Runnable,KeyListener{
+	//is the base of the game loop
 	private boolean running;
-	//private boolean gameOverTest;
-	public static final int boardSizeX = 1200;
-	public static final int boardSizeY = 800;
-	private Thread game; //butt
-	private int direction; //the previus direction of the player
+	//size in px of the JPanel
+	private static final int boardSizeX = 1200;
+	private static final int boardSizeY = 800;
+	//self explanitary
+	private Thread game;
+	//the previus direction of the player
+	private int direction; 
+	//the player object (not held in the board)
 	private Player player;
+	//position of the player
 	private int curPos;
+	//builds the current view of the player and holds a Graphics2D
+	private DrawView view;
+	//the graphics object of the JPanel
+	private Graphics2D g2d;
+	//the current board of the maze
+	private MazeTile[][] b;
+
+	//the constructor for the game object
 	public Game(){
+		//the head graphics object of the JPanel		//the view of the player
+		view = new DrawView();
 		//the direction of the player
-		direction = null;
+		direction = 0;
 		//start point of the player
 		int startX=1;
 		int startY=1;
@@ -31,19 +46,19 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		int height = abyss.height;
 		int width =	abyss.width;
 		//makes board
-		MazeTile[][] b = abyss.getBoard();
+		b = abyss.getBoard();
 		//makes the first position
-		curPos = firstDirection(b,startX,startY);
+		curPos = firstDirection(startX,startY);
 		//makes new player
 		player = new Player(10, 5, curPos,b,startX,startY);
 		//adds player to start point
 		b[startX][startY].addPlayer();
 		//prints board
-		printBoard(b,height,width);
+		printBoard(height,width);
 	}
 
 	//prints the current contense of current MazeTile[][] bs
-	public void printBoard(MazeTile[][] b,int height,int width){
+	public void printBoard(int height,int width){
 		int space = 0;
 		for (int c = 0; c < width; c++) {
 			for (int u = 0; u < height; u++) {
@@ -70,7 +85,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	//returns and int that represents the current view of the player 
 	//This int is betwean 0 - 12 There are 13 difrent possable views
 	//This int is used to decide which png to print to the Jpanel
-	public int getPosition(MazeTile[][] b) {
+	public int getPosition() {
 		int x = player.LOC_X;
 		int y = player.LOC_Y;
 		int position = 0;
@@ -145,34 +160,40 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	}
 
 	//returns the direction of the first player when the object is spawned into the game
-	private int firstDirection(MazeTile[][] b,int x,int y){
+	private int firstDirection(int x,int y){
 		if(!b[x-1][y].getWall()){
-			direction = 0
+			//notrh
+			direction = 0;
 		}else if(!b[x][y-1].getWall()){
+			//west
 			direction = 3;
 		}else if(!b[x][y+1].getWall()){
+			//east
 			direction = 1;
 		}else if(!b[x+1][y].getWall()){
+			//south
 			direction = 2;
 		}
 		return direction;
 	}
 
-	//when the player turns it changes the int representitive of the comepus
+	//when the player turns it changes the int representitive of the comepus in the object player called direction
 	//			 0
 	//			 N
 	//       3 W + E 1
 	//			 S
 	//			 2
 	private void playerTurn(boolean rightOrLeft){
-		if(rightOrLeft){//right turn
+		//right turn
+		if(rightOrLeft){
 			if(direction != 3){
 				player.changeDirection(direction + 1);
 			}else{
 				direction = 0;
 				player.changeDirection(direction);
 			}
-		}else{//left turn
+		//left turn	
+		}else{
 			if(direction != 0){
 				player.changeDirection(direction - 1);
 			}else{
@@ -182,6 +203,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		}
 	}
 
+	//
 	private void playerMove(){
 		//old player location befor move
 		int pX = player.LOC_X;
@@ -224,10 +246,8 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	
 	//used to render the graphics
 	private void render(){
-		Graphics2D g2d = (Graphics2D) getGraphics();
-		DrawView View = new DrawView(g2d,curPos);
-		g2d.setColor(Color.BLUE);
-		g2d.fillRect(50, 50, 100, 100);
+		view.setView(curPos);
+		g2d = view.getGraphics();
 	}
 
 	//game loop
