@@ -2,10 +2,11 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import javax.imageio.ImageIO;
-import java.io.File;
 import java.net.URL;
 import java.awt.Toolkit;
 import java.net.MalformedURLException;
+import java.io.IOException;
+import java.io.File;
 
 
 public class DrawView {
@@ -13,10 +14,10 @@ public class DrawView {
 	int boardSizeY;
 	int boardSizeX;
 	int pos;
-	URL url;
+	File url;
 	BufferedImage currentView;
 	public DrawView(){
-		
+
 	}
 
 	public void setView(int pos){
@@ -25,115 +26,77 @@ public class DrawView {
 	}
 
 	private void makeView(){
+		String urlName;
 		switch(pos){
 			case 0:
-				try{
-					url = new URL("../resource/deadEnd.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//deadEnd.png";
+				makeFile(urlName);
 				break;
 			case 1:
-				try{
-					url = new URL("../resource/Hall.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//Hall.png";			
+				makeFile(urlName);
 				break;
 			case 2:
-				try{
-					url = new URL("../resource/RightOpen.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//rightOpen.png";			
+				makeFile(urlName);
 				break;
 			case 3:
-				try{
-					url = new URL("../resource/LeftOpen.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//LeftOpen.png";	
+				makeFile(urlName);	
 				break;
 			case 4:
-				try{
-					url = new URL("../resource/farLeftTurn.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName ="..//resource//farLeftTurn.png";			
+				makeFile(urlName);
 				break;
 			case 5:
-				try{
-					url = new URL("../resource/farRightTurn.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//farRightTurn.png";			
+				makeFile(urlName);
 				break;
 			case 6:
-				try{
-					url = new URL("../resource/rightCloseFarLeft.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//rightCloseFarLeft.png";			
+				makeFile(urlName);
 				break;
 			case 7:
-				try{
-					url = new URL("../resource/leftCloseFarRight.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//leftCloseFarRight.png";			
+				makeFile(urlName);
 				break;
 			case 8:
-				try{
-					url = new URL("../resource/fork.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//fork.png";			
+				makeFile(urlName);
 				break;
 			case 9:
-				try{
-					url = new URL("../resource/farT.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//farT.png";			
+				makeFile(urlName);
 				break;
 			case 10:
-				try{
-					url = new URL("../resource/T.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName ="..//resource//T.png";			
+				makeFile(urlName);
 				break;
 			case 11:
-				try{
-					url = new URL("../resource/closerLeftTurn.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//closerLeftTurn.png";			
+				makeFile(urlName);
 				break;
 			case 12:
-				try{
-					url = new URL("../resource/CloseRightTurn.png");			
-				}catch(MalformedURLException ex){
-					System.err.println("MalformedURLException");
-				}
-				currentView = (BufferedImage) Toolkit.getDefaultToolkit().getImage(url);
+				urlName = "..//resource//CloseRightTurn.png";			
+				makeFile(urlName);
 				break;
+		}
+		try{
+			currentView = (BufferedImage) ImageIO.read(url);
+		}catch(IOException ex){
+			System.err.println("immageIO couldent read url");
 		}
 		g2d = currentView.createGraphics();
 	}
 	
+	private void makeFile(String urlName){
+		// try{
+			url = new File(urlName);			
+		// }catch(MalformedURLException ex){
+		// 	System.err.println("FileNotFoundException");
+		// }
+	}
+
 	public Graphics2D getGraphics(){
 		return g2d;
 	}
