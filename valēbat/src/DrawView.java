@@ -83,10 +83,10 @@ public class DrawView {
 		}
 		try{
 			currentView = (BufferedImage) ImageIO.read(url);
+			g2d = currentView.createGraphics();
 		}catch(IOException ex){
 			System.err.println("immageIO couldent read url");
 		}
-		g2d = currentView.createGraphics();
 	}
 	
 	private void makeFile(String urlName){

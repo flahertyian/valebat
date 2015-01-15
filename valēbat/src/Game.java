@@ -207,7 +207,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 
 	//
 	private void playerMove(){
-		//old player location befor move
+		//old player location before move
 		int pX = player.LOC_X;
 		int pY = player.LOC_Y;
 		//player moves
@@ -232,7 +232,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 			playerMove();
 			System.out.println("Up");
 		}if(Key.typed(KeyEvent.VK_DOWN)){
-			playerMove();
+			//playerMove();
 			System.out.println("Down");
 		}if(Key.typed(KeyEvent.VK_LEFT)){
 			playerTurn(false);
