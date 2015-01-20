@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -21,18 +22,19 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	private Player player;
 	//position of the player
 	private int curPos;
-	//builds the current view of the player and holds a Graphics2D
+	//builds the current view of the player on the Graphics2D object
 	private DrawView view;
 	//the graphics object of the JPanel
 	private Graphics2D g2d;
+	//the immage that holds the current panel's graphics
+	private BufferedImage buff;
 	//the current board of the maze
 	private MazeTile[][] b;
 
 	//the constructor for the game object
 	public Game(){
-		g2d = (Graphics2D)this.getGraphics();
 		//the head graphics object of the JPanel		//the view of the player
-		view = new DrawView();
+		view = new DrawView(g2d);
 		//the direction of the player
 		direction = 0;
 		//start point of the player
@@ -249,7 +251,14 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	//used to render the graphics
 	private void render(){
 		view.setView(curPos);
-		g2d = view.getGraphics();
+		super.paintComponent((Graphics)g2d);
+		//g2d.setBackground(Color.RED);
+
+	}
+
+	@Override
+	public void paintComponent(Graphics g){
+		
 	}
 
 	//game loop

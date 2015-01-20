@@ -16,8 +16,8 @@ public class DrawView {
 	int pos;
 	File url;
 	BufferedImage currentView;
-	public DrawView(){
-
+	public DrawView(Graphics2D g2d){
+		this.g2d = g2d;
 	}
 
 	public void setView(int pos){
@@ -86,18 +86,13 @@ public class DrawView {
 		}catch(IOException ex){
 			System.err.println("immageIO couldent read url");
 		}
+		if(currentView == null){
+			System.err.println("currentView not initalized proberly");
+		}
 		g2d = currentView.createGraphics();
 	}
 	
 	private void makeFile(String urlName){
-		// try{
 			url = new File(urlName);			
-		// }catch(MalformedURLException ex){
-		// 	System.err.println("FileNotFoundException");
-		// }
-	}
-
-	public Graphics2D getGraphics(){
-		return g2d;
 	}
 }
