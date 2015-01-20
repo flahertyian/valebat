@@ -19,22 +19,21 @@ public class Player {
 
 	//called to test if the next move is occupied with a tile
 	public boolean move(int direction){
-		int c = 1;
 		if(direction == 0){
-			if(!b[LOC_X][LOC_Y-c].getWall()){
-				LOC_Y -= c;
+			if(!b[LOC_X][LOC_Y-1].getWall()){
+				LOC_Y--;
 			}
 		}else if(direction == 1){
-			if(!b[LOC_X+c][LOC_Y].getWall()){
-				LOC_X += c;
+			if(!b[LOC_X+1][LOC_Y].getWall()){
+				LOC_X++;
 			}
 		}else if(direction == 2){
-			if(!b[LOC_X][LOC_Y+c].getWall()){
-				LOC_Y += c;
+			if(!b[LOC_X][LOC_Y+1].getWall()){
+				LOC_Y++;
 			}
 		}else if(direction == 3){
-			if(!b[LOC_X-c][LOC_Y].getWall()){
-				LOC_X-=c;
+			if(!b[LOC_X-1][LOC_Y].getWall()){
+				LOC_X--;
 			}
 		}
 		return true;
