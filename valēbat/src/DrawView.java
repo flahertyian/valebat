@@ -16,8 +16,7 @@ public class DrawView {
 	int pos;
 	File url;
 	BufferedImage currentView;
-	public DrawView(Graphics2D g2d){
-		this.g2d = g2d;
+	public DrawView(){
 	}
 
 	public void setView(int pos){
@@ -91,8 +90,12 @@ public class DrawView {
 		}
 		g2d = currentView.createGraphics();
 	}
+	public Graphics2D createGraphics(){
+		return g2d;
+	}
 	
 	private void makeFile(String urlName){
-			url = new File(urlName);			
+		System.out.println(urlName);
+		url = new File(urlName);			
 	}
 }

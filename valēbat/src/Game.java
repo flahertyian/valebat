@@ -25,7 +25,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	//builds the current view of the player on the Graphics2D object
 	private DrawView view;
 	//the graphics object of the JPanel
-	private Graphics2D g2d;
+	//private Graphics2D g2d;
 	//the immage that holds the current panel's graphics
 	private BufferedImage buff;
 	//the current board of the maze
@@ -33,8 +33,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 
 	//the constructor for the game object
 	public Game(){
-		//the head graphics object of the JPanel		//the view of the player
-		view = new DrawView(g2d);
+		view = new DrawView();
 		//the direction of the player
 		direction = 0;
 		//start point of the player
@@ -209,7 +208,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 
 	//
 	private void playerMove(){
-		//old player location before move
+		//old player location befor move
 		int pX = player.LOC_X;
 		int pY = player.LOC_Y;
 		//player moves
@@ -234,7 +233,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 			playerMove();
 			System.out.println("Up");
 		}if(Key.typed(KeyEvent.VK_DOWN)){
-			//playerMove();
+			playerMove();
 			System.out.println("Down");
 		}if(Key.typed(KeyEvent.VK_LEFT)){
 			playerTurn(false);
@@ -251,15 +250,12 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	//used to render the graphics
 	private void render(){
 		view.setView(curPos);
+		Graphics g2d = view.createGraphics();
 		super.paintComponent((Graphics)g2d);
 		//g2d.setBackground(Color.RED);
 
 	}
 
-	@Override
-	public void paintComponent(Graphics g){
-		
-	}
 
 	//game loop
 	public void run() {

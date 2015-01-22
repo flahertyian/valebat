@@ -14,7 +14,7 @@ public class Player {
 		this.direction = direction;
 		this.LOC_Y=locY;
 		this.LOC_X=locX;
-		System.out.println(direction);
+		System.out.println(direction + " is the direction of the player");
 	}
 
 	//called to test if the next move is occupied with a tile

@@ -13,6 +13,8 @@ public class Runner extends JFrame {
 		jf.setLocationRelativeTo(null);
 		jf.setVisible(true);
 
+
+
 		game.start();
 	}
 	
