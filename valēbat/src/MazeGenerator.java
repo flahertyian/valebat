@@ -48,9 +48,12 @@ public class MazeGenerator {
 				x = startX;
 				y = startY;	
 			}
-			//if the maze can't be finished (determined by having had to backtrack 10 * the area of the map)...
+			//if the maze can't be finished (determined by having had to backtrack 5000 * the area of the map)...
 			//...it resets the maze so that it can try again
-			if (backs >= height * width * 100) {
+			if (backs >= height * width * 5000) {
+				//------------------------------------------------
+				printBoard();
+				//------------------------------------------------
 				//changes backs and spaces back to 0
 				backs = 0;
 				spaces = 0;
@@ -260,7 +263,7 @@ public class MazeGenerator {
 				alternate = false;
 			}
 			//tests if the maze reaches from the start to the end & is long enough
-			works = test(spaces);
+			works = (board[endX][endY].getThere() && spaces > ((height * width) / 2));
 			//set's the cardinal directions for the adjacent tiles
 			for (int i = 0; i < height; i++) {
 				for (int o = 0; o < width; o++) {
@@ -291,63 +294,40 @@ public class MazeGenerator {
 		printBoard();
 	}
 //-------------------PRINTS OUT BOARD--------------------------------------
-		public void printBoard(){
-			int space = 0;
-			//for (int u = 0; u <= height; u++) {
-				//System.out.print("##");
-			//}
-			//System.out.println("#");
-			for (int c = 0; c < width; c++) {
-				//System.out.print("# ");
-				for (int u = 0; u < height; u++) {
-					if (board[c][u].getThere()) {
-						// if (board[c][u].getStart()) {
-						// 	System.out.print("S ");
-						// } else if (board[c][u].getExit()) {
-						// 	System.out.print("E ");
-						// } else {
-						// 	System.out.print("  ");
-						// }
-						space++;
-					} else{
-						//System.out.print("# ");
-						//--------------------------NECESSARY-------------------------------------
-						board[c][u].setWall();					
-						//------------------------------------------------------------------------
-					} 
-				}
-//				System.out.println("#");
+	public void printBoard(){
+		//int space = 0;
+		//for (int u = 0; u <= height; u++) {
+			//System.out.print("##");
+		//}
+		//System.out.println("#");
+		for (int c = 0; c < width; c++) {
+			//System.out.print("# ");
+			for (int u = 0; u < height; u++) {
+				if (board[c][u].getThere()) {
+					// if (board[c][u].getStart()) {
+					// 	System.out.print("S ");
+					// } else if (board[c][u].getExit()) {
+					// 	System.out.print("E ");
+					// } else {
+					// 	System.out.print("  ");
+					// }
+					//space++;
+				} else{
+					//System.out.print("# ");
+					//--------------------------NECESSARY-------------------------------------
+					board[c][u].setWall();					
+					//------------------------------------------------------------------------
+				} 
 			}
-//			for (int u = 0; u <= height; u++) {
-//				System.out.print("##");
-//			}
+//			System.out.println("#");
+		}
+//		for (int u = 0; u <= height; u++) {
+//			System.out.print("##");
+//		}
 //		System.out.println("#");
 //		System.out.println();
 //		System.out.println(space);
 //------------------------------------------------------------------------
-		}
-	
-	
-	//tests if the maze works
-	public boolean test(int spaces) {
-//-------------------PRINTS OUT BOARD--------------------------------------
-//		for (int c = 0; c < width; c++) {
-//			for (int u = 0; u < height; u++) {
-//				if (board[c][u].getThere()) {
-//					System.out.print("O ");
-//				} else if (board[c][u].getIsAdjacent()){
-//					System.out.print("W ");
-//				} else {
-//					System.out.print("X ");
-//				}
-//			}
-//			System.out.println();
-//		}
-//		System.out.println();
-//		System.out.println();
-//------------------------------------------------------------------------
-		boolean works = (board[endX][endY].getThere() && spaces > ((height * width) / 2));
-		return works;
 	}
 	
 	//returns the board
