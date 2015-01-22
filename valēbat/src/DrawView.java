@@ -88,10 +88,9 @@ public class DrawView {
 		if(currentView == null){
 			System.err.println("currentView not initalized proberly");
 		}
-		g2d = currentView.createGraphics();
 	}
-	public Graphics2D createGraphics(){
-		return g2d;
+	public BufferedImage getBufferedImage(){
+		return currentView;
 	}
 	
 	private void makeFile(String urlName){
