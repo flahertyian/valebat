@@ -30,6 +30,8 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	private BufferedImage buff;
 	//the current board of the maze
 	private MazeTile[][] b;
+	private int height;
+	private int width;
 
 	//the constructor for the game object
 	public Game(){
@@ -46,8 +48,8 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		//makes board
 		MazeGenerator abyss = new MazeGenerator(50,50,startX,startY,30,30);
 		//size of the board
-		int height = abyss.height;
-		int width =	abyss.width;
+		height = abyss.height;
+		width =	abyss.width;
 		//makes board
 		b = abyss.getBoard();
 		//makes the first position
@@ -204,6 +206,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 				player.changeDirection(direction);
 			}
 		}
+		printBoard(height, width);
 	}
 
 	//
@@ -218,13 +221,17 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		int pYnew = player.LOC_Y;
 		//updates board with player location
 		updateBoard(pX,pY,pXnew,pYnew);
+		printBoard(height, width);
 	}
 
 	private void updateBoard(int pX, int pY, int pXnew, int pYnew){
-		//adds the player to the board
-		b[pXnew][pYnew].addPlayer();
 		//removes the players old location from the board
 		b[pX][pY].removePlayer();
+		//adds the player to the board
+		b[pXnew][pYnew].addPlayer();
+		if (b[pXnew][pYnew].getIsPlayer()) {
+			System.out.println("HONEY! I'M HOOOOOME!");
+		}
 	}
 
 	private void update(){
