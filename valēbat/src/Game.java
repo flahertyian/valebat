@@ -12,7 +12,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	//is the base of the game loop
 	private boolean running;
 	//size in px of the JPanel
-	private static final int boardSizeX = 1200;
+	private static final int boardSizeX = 800;
 	private static final int boardSizeY = 800;
 	//self explanitary
 	private Thread game;
@@ -23,7 +23,6 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	//position of the player
 	private int curPos;
 	//builds the current view of the player on the Graphics2D object
-	private DrawView view;
 	//the graphics object of the JPanel
 	//private Graphics2D g2d;
 	//the immage that holds the current panel's graphics
@@ -32,10 +31,8 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	private MazeTile[][] b;
 	private int height;
 	private int width;
-
 	//the constructor for the game object
 	public Game(){
-		view = new DrawView();
 		//the direction of the player
 		direction = 0;
 		//start point of the player
@@ -256,10 +253,18 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	
 	//used to render the graphics
 	private void render(){
-		view.setView(curPos);
-		Graphics g2d = view.createGraphics();
-		super.paintComponent((Graphics)g2d);
 		//g2d.setBackground(Color.RED);
+
+	}
+		public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
+		DrawView dv = new DrawView();
+		dv.setView(curPos);
+		BufferedImage buff = dv.getBufferedImage();
+		//g2d = buff.createGraphics();
+		g2d.drawImage(buff, 0, 0, 800, 800, this);
+		System.out.println(buff.toString());
 
 	}
 
