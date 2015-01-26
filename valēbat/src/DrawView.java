@@ -90,11 +90,12 @@ public class DrawView {
 		}
 	}
 	public BufferedImage getBufferedImage(){
+		System.out.println("immage was asked for");
 		return currentView;
 	}
 	
 	private void makeFile(String urlName){
-		System.out.println(urlName);
+		//System.out.println(urlName);
 		url = new File(urlName);			
 	}
 }

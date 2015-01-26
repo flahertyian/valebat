@@ -185,24 +185,41 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	//       3 W + E 1
 	//			 S
 	//			 2
-	private void playerTurn(boolean rightOrLeft){
-		//right turn
-		if(rightOrLeft){
+	private void playerTurn(int turning){
+		//right turn #1
+		if(turning == 1){
 			if(direction != 3){
 				player.changeDirection(direction + 1);
 			}else{
 				direction = 0;
 				player.changeDirection(direction);
 			}
-		//left turn	
-		}else{
+		//left turn	#2
+		}else if(turning == 2){
 			if(direction != 0){
 				player.changeDirection(direction - 1);
 			}else{
 				direction = 3;
 				player.changeDirection(direction);
 			}
+		//turn araound #3
+		}else if(turning == 3){
+			switch(direction){
+				case 0:
+					direction = 2;
+					break;
+				case 1:
+					direction = 3;
+					break;
+				case 2:
+					direction = 0;
+					break;
+				case 3:
+					direction = 1;
+					break;
+			}
 		}
+		System.out.println(direction);
 		printBoard(height, width);
 	}
 
@@ -218,17 +235,20 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		int pYnew = player.LOC_Y;
 		//updates board with player location
 		updateBoard(pX,pY,pXnew,pYnew);
-		printBoard(height, width);
 	}
 
 	private void updateBoard(int pX, int pY, int pXnew, int pYnew){
-		//removes the players old location from the board
-		b[pX][pY].removePlayer();
 		//adds the player to the board
 		b[pXnew][pYnew].addPlayer();
+
+		//removes player from board
+		//b[pX][pY].removePlayer();
+
 		if (b[pXnew][pYnew].getIsPlayer()) {
 			System.out.println("HONEY! I'M HOOOOOME!");
 		}
+		printBoard(height, width);
+
 	}
 
 	private void update(){
@@ -237,13 +257,13 @@ public class Game extends JPanel implements Runnable,KeyListener{
 			playerMove();
 			System.out.println("Up");
 		}if(Key.typed(KeyEvent.VK_DOWN)){
-			playerMove();
+			playerTurn(3);
 			System.out.println("Down");
 		}if(Key.typed(KeyEvent.VK_LEFT)){
-			playerTurn(false);
+			playerTurn(2);
 			System.out.println("Left");
 		}if(Key.typed(KeyEvent.VK_RIGHT)){
-			playerTurn(true);
+			playerTurn(1);
 			System.out.println("Right");
 		}if(Key.typed(KeyEvent.VK_SPACE)){
 			System.out.println("Space");
@@ -253,8 +273,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	
 	//used to render the graphics
 	private void render(){
-		//g2d.setBackground(Color.RED);
-
+		repaint();
 	}
 		public void paintComponent(Graphics g){
 		super.paintComponent(g);
@@ -262,9 +281,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		DrawView dv = new DrawView();
 		dv.setView(curPos);
 		BufferedImage buff = dv.getBufferedImage();
-		//g2d = buff.createGraphics();
 		g2d.drawImage(buff, 0, 0, 800, 800, this);
-		System.out.println(buff.toString());
 
 	}
 

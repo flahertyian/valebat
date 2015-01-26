@@ -14,11 +14,10 @@ public class Player {
 		this.direction = direction;
 		this.LOC_Y=locY;
 		this.LOC_X=locX;
-		System.out.println(direction + " is the direction of the player");
 	}
 
 	//called to test if the next move is occupied with a tile
-	public boolean move(int direction){
+	public void move(int direction){
 		if(direction == 0){
 			if(!b[LOC_X][LOC_Y-1].getWall()){
 				LOC_Y--;
@@ -36,12 +35,13 @@ public class Player {
 				LOC_X--;
 			}
 		}
-		return true;
+		
 	}
 		
 
 	public void changeDirection(int d){
 		direction = d;
+		System.out.println(direction);
 	}
 
 	//gives the attacked unit damage
