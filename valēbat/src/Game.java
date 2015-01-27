@@ -49,21 +49,24 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		width =	abyss.width;
 		//makes board
 		b = abyss.getBoard();
+
 		//makes the first position
-		curPos = firstDirection(startX,startY);
+		direction = firstDirection(startX,startY);
 		//makes new player
-		player = new Player(10, 5, curPos,b,startX,startY);
+		player = new Player(10, 5, direction,b,startX,startY);
+		//gets the view of the player
+		curPos = getPosition();
 		//adds player to start point
 		b[startX][startY].addPlayer();
 		//prints board
 		printBoard(height,width);
 	}
 
-	//prints the current contense of current MazeTile[][] bs
+	//prints the current contense of current MazeTile[][] b
 	public void printBoard(int height,int width){
 		int space = 0;
-		for (int c = 0; c < width; c++) {
-			for (int u = 0; u < height; u++) {
+		for (int u = 0; u < height; u++) {
+			for (int c = 0; c < width; c++) {
 				if (b[c][u].getThere()) {
 					if (b[c][u].getIsPlayer()) {
 						System.out.print("p ");
@@ -243,7 +246,9 @@ public class Game extends JPanel implements Runnable,KeyListener{
 			b[pXnew][pYnew].addPlayer();
 			//removes player from board
 			b[pX][pY].removePlayer();
-		}	
+		}else{
+			System.out.println("hugged a wall");
+		}
 		if (b[pXnew][pYnew].getIsPlayer()) {
 			System.out.println("HONEY! I'M HOOOOOME!");
 		}
