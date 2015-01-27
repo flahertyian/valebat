@@ -239,11 +239,11 @@ public class Game extends JPanel implements Runnable,KeyListener{
 
 	private void updateBoard(int pX, int pY, int pXnew, int pYnew){
 		//adds the player to the board
-		b[pXnew][pYnew].addPlayer();
-
-		//removes player from board
-		b[pX][pY].removePlayer();
-
+		if(!b[pXnew][pYnew].getWall()){
+			b[pXnew][pYnew].addPlayer();
+			//removes player from board
+			b[pX][pY].removePlayer();
+		}	
 		if (b[pXnew][pYnew].getIsPlayer()) {
 			System.out.println("HONEY! I'M HOOOOOME!");
 		}
