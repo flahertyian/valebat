@@ -242,7 +242,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		b[pXnew][pYnew].addPlayer();
 
 		//removes player from board
-		//b[pX][pY].removePlayer();
+		b[pX][pY].removePlayer();
 
 		if (b[pXnew][pYnew].getIsPlayer()) {
 			System.out.println("HONEY! I'M HOOOOOME!");
@@ -286,7 +286,7 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	}
 
 
-	//game loop
+	//game ploop
 	public void run() {
 		long fpsTimer = System.currentTimeMillis();
 		double nsPerUpdate = 1000000000.0 / 60;

@@ -90,7 +90,6 @@ public class DrawView {
 		}
 	}
 	public BufferedImage getBufferedImage(){
-		System.out.println("immage was asked for");
 		return currentView;
 	}
 	
