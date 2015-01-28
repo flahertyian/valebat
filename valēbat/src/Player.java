@@ -40,10 +40,10 @@ public class Player {
 	}
 		
 
-	public void changeDirection(int d){
-		direction = d;
-		System.out.println(direction);
-	}
+	// public void changeDirection(int d){
+	// 	direction = d;
+	// 	System.out.println(direction);
+	// }
 
 	//gives the attacked unit damage
 	public void attack(Creature c){

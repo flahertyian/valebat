@@ -166,16 +166,16 @@ public class Game extends JPanel implements Runnable,KeyListener{
 
 	//returns the direction of the first player when the object is spawned into the game
 	private int firstDirection(int x,int y){
-		if(!b[x-1][y].getWall()){
+		if(!b[x][y-1].getWall()){
 			//notrh
 			direction = 0;
-		}else if(!b[x][y-1].getWall()){
+		}else if(!b[x-1][y].getWall()){
 			//west
 			direction = 3;
-		}else if(!b[x][y+1].getWall()){
+		}else if(!b[x+1][y].getWall()){
 			//east
 			direction = 1;
-		}else if(!b[x+1][y].getWall()){
+		}else if(!b[x][y+1].getWall()){
 			//south
 			direction = 2;
 		}
@@ -192,18 +192,16 @@ public class Game extends JPanel implements Runnable,KeyListener{
 		//right turn #1
 		if(turning == 1){
 			if(direction != 3){
-				player.changeDirection(direction + 1);
+				direction +=1;
 			}else{
 				direction = 0;
-				player.changeDirection(direction);
 			}
 		//left turn	#2
 		}else if(turning == 2){
 			if(direction != 0){
-				player.changeDirection(direction - 1);
+				direction -=1;
 			}else{
 				direction = 3;
-				player.changeDirection(direction);
 			}
 		//turn araound #3
 		}else if(turning == 3){
@@ -222,7 +220,6 @@ public class Game extends JPanel implements Runnable,KeyListener{
 					break;
 			}
 		}
-		System.out.println(direction);
 		printBoard(height, width);
 	}
 
@@ -280,6 +277,8 @@ public class Game extends JPanel implements Runnable,KeyListener{
 	private void render(){
 		repaint();
 	}
+
+	//overrides paintComponet from JComponent drawing the buffered immage to the pannel
 		public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
